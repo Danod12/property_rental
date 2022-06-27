@@ -1,21 +1,22 @@
+import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <nav className="nav">
-      <a href="/" className="site_title">
+      <Link to="/" className="site_title">
         Property Rental
-      </a>
+      </Link>
       <ul>
         <li>
-          <a href="/buy">Buy</a>
+          <Link to="/buy">Buy</Link>
         </li>
         <li>
-          <a href="/rent">Rent</a>
+          <Link to="/rent">Rent</Link>
         </li>
         <li>
-          <a href="/share">Share</a>
+          <Link to="/share">Share</Link>
         </li>
         <li>
-          <a href="/login">Login</a>
+          <Link to="/login">Login</Link>
         </li>
       </ul>
     </nav>
