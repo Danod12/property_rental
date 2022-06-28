@@ -1,4 +1,10 @@
-import { Route, Routes } from "react-router-dom";
+import {
+  BroserRouter as Router,
+  Route,
+  Routes,
+  Link,
+  Switch,
+} from "react-router-dom";
 import Navbar from "./components/common/Navbar";
 import LandingMain from "./pages/Landing_main";
 import Buy from "./pages/Buy";

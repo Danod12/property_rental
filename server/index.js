@@ -2,13 +2,38 @@ const express = require("express");
 const app = express();
 const PORT = 3001;
 const mysql = require("mysql2");
-const cors = require("cors");
+const cors = require("cors"); //cross origin resource sharing. Necessary for communication between front and back ends
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const session = require("express-session"); //creating session
 
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 app.use(express.json()); //automattically parsing everything that is sent from the front end
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
+
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+//variables for session
+app.use(
+  session({
+    key: "userId",
+    secret: "subscribe",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 60 * 24 * 24,
+    },
+  })
+);
+
 const db = mysql.createConnection({
   user: "root",
   host: "localhost",
@@ -39,22 +64,32 @@ app.post("/register", (req, res) => {
   });
 });
 
+app.get("/login", (req, res) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, user: req.session.user });
+  } else {
+    res.send({ loggedIn: false });
+  }
+});
+
 app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
   db.query(
-    "SELECT * FROM user_customer WHERE username = ?;",
-    [username],
+    "SELECT * FROM user_customer WHERE username = ?;", //first checking to see if a user name is in the database
+    username,
     (err, result) => {
       if (err) {
         console.log({ err: err });
       }
-
+      // if a result is returned - compared passwords
       if (result.length > 0) {
-        bycrypt.compare(password, result[0].password, (err, response) => {
+        bcrypt.compare(password, result[0].password, (error, response) => {
           if (response) {
+            req.session.user = result; //creating a session with the name user set by the result we get from the database
             res.send(result);
+            console.log(req.session.user);
           } else {
             res.send({ message: "Wrong username combo" });
           }
