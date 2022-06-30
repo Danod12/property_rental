@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Axios from "axios";
+import { LoginContext } from "../components/Contexts/LoginContext";
 
 export default function Login() {
   const [userNameReg, setUserNameReg] = useState("");
@@ -12,6 +13,9 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   const [loginStatus, setLoginStatus] = useState("");
+
+  const { setIsAuth } = useContext(LoginContext);
+  const { setUserId } = useContext(LoginContext);
 
   Axios.defaults.withCredentials = true;
 
@@ -36,13 +40,15 @@ export default function Login() {
         setLoginStatus(response.data.message);
       } else {
         setLoginStatus(response.data[0].username);
+        setIsAuth(true);
+        setUserId(response.data[0].id);
       }
     });
   };
 
   useEffect(() => {
     Axios.get("http://localhost:3001/login").then((response) => {
-      if (response.data.loggedIn == true) {
+      if (response.data.loggedIn === true) {
         setLoginStatus(response.data.user[0].username);
       }
     });

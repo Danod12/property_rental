@@ -1,32 +1,53 @@
-import {
-  BroserRouter as Router,
-  Route,
-  Routes,
-  Link,
-  Switch,
-} from "react-router-dom";
-import Navbar from "./components/common/Navbar";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { LoginContext } from "./components/Contexts/LoginContext";
+import { useState } from "react";
+
 import LandingMain from "./pages/Landing_main";
-import Buy from "./pages/Buy";
 import Rent from "./pages/Rent";
-import Share from "./pages/Share";
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import ProtectedRoutes from "./pages/ProtectedRoutes";
+
+const Nav = ({ userId }) => (
+  <ul>
+    <li>
+      <Link to="/">Home</Link>
+    </li>
+    <li>
+      <Link to="/rent">Rent</Link>
+    </li>
+    <li>
+      <Link to="/login">Login</Link>
+    </li>
+    <li>
+      <Link to={`/profile/${userId}`}>Profile</Link>
+    </li>
+  </ul>
+);
 
 function App() {
+  const [isAuth, setIsAuth] = useState(false);
+  const [userId, setUserId] = useState(null);
+
   return (
-    <>
-      <Navbar />
-      <div className="my-navbar">
-        <Routes>
-          <Route path="/" element={<LandingMain />}></Route>
-          <Route path="/buy" element={<Buy />}></Route>
-          <Route path="/rent" element={<Rent />}></Route>
-          <Route path="/share" element={<Share />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-        </Routes>
-      </div>
-    </>
+    <div>
+      <Router>
+        <Nav userId={userId} />
+        <Route exact path="/" component={LandingMain}></Route>
+        <Route path="/rent" component={Rent}></Route>
+
+        <LoginContext.Provider value={{ isAuth, setIsAuth, userId, setUserId }}>
+          <Route path="/login" component={Login}></Route>
+
+          <ProtectedRoutes
+            path="/profile/:userId"
+            component={Profile}
+            isAuth={isAuth}
+          />
+        </LoginContext.Provider>
+      </Router>
+      <h1>{isAuth}</h1>
+    </div>
   );
 }
-
 export default App;
