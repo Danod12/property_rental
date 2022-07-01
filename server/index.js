@@ -10,6 +10,14 @@ const path = require("path");
 
 //Login Handling
 
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+); //verification for front end origin
+
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
@@ -110,7 +118,7 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./Work_Refs");
+    cb(null, "Work_Refs");
   }, //first argument is for errors during sending
 
   filename: (req, file, cb) => {
@@ -119,7 +127,7 @@ const storage = multer.diskStorage({
   },
 }); //where the specification of the file is determined
 
-const upload = multer({ storage });
+const upload = multer({ storage: storage });
 
 app.set("view engine", "ejs");
 
@@ -129,7 +137,6 @@ app.get("/update", (req, res) => {
 
 app.post("/update", upload.single("file"), (req, res) => {
   res.send("Image Uploaded");
-  console.log("it has made it here");
 });
 
 app.listen(PORT, () => {
