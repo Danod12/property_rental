@@ -6,6 +6,7 @@ import LandingMain from "./pages/Landing_main";
 import Rent from "./pages/Rent";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import Update from "./pages/Update";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
 
 const Nav = ({ userId }) => (
@@ -21,6 +22,9 @@ const Nav = ({ userId }) => (
     </li>
     <li>
       <Link to={`/profile/${userId}`}>Profile</Link>
+    </li>
+    <li>
+      <Link to={"update"}>Update Profile</Link>
     </li>
   </ul>
 );
@@ -44,6 +48,8 @@ function App() {
             component={Profile}
             isAuth={isAuth}
           />
+
+          <ProtectedRoutes path="/update" component={Update} isAuth={isAuth} />
         </LoginContext.Provider>
       </Router>
       <h1>{isAuth}</h1>

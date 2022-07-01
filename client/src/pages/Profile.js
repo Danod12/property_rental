@@ -8,8 +8,6 @@ function Profile() {
     <div>
       <div>You are authenticated</div>
       <div> Username: {userId}</div>
-      <div> Work Reference: </div>
-      <div> PhotoID: </div>
     </div>
   );
 }

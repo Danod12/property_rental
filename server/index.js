@@ -6,6 +6,9 @@ const cors = require("cors"); //cross origin resource sharing. Necessary for com
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session"); //creating session
+const path = require("path");
+
+//Login Handling
 
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -99,6 +102,34 @@ app.post("/login", (req, res) => {
       }
     }
   );
+});
+
+// Image Uploading
+
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./Work_Refs");
+  }, //first argument is for errors during sending
+
+  filename: (req, file, cb) => {
+    console.log(file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+}); //where the specification of the file is determined
+
+const upload = multer({ storage });
+
+app.set("view engine", "ejs");
+
+app.get("/update", (req, res) => {
+  res.render("file");
+});
+
+app.post("/update", upload.single("file"), (req, res) => {
+  res.send("Image Uploaded");
+  console.log("it has made it here");
 });
 
 app.listen(PORT, () => {
