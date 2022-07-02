@@ -70,6 +70,7 @@ app.post("/register", (req, res) => {
       [username, hash, firstName, lastName, email],
       (err, result) => {
         console.log(err);
+        setdbID(result.data.id);
       }
     );
   });
@@ -137,6 +138,16 @@ app.get("/update", (req, res) => {
 
 app.post("/update", upload.single("file"), (req, res) => {
   res.send("Image Uploaded");
+  const fileNameDB = req.file.filename;
+  const currentUser = req.header("userID");
+
+  db.query(
+    "UPDATE user_customer SET work_ref = ? WHERE id = ?;",
+    [fileNameDB, currentUser],
+    (err, result) => {
+      console.log(err);
+    }
+  );
 });
 
 app.listen(PORT, () => {
