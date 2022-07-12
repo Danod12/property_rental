@@ -8,6 +8,19 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session"); //creating session
 const path = require("path");
 
+//What is a req and what is a res
+//req is getting information from the front end
+//res is sending information to the front end
+
+//Database connection
+
+const db = mysql.createConnection({
+  user: "root",
+  host: "localhost",
+  password: "oyo8Doro16!",
+  database: "property_rental",
+});
+
 //Login Handling
 
 app.use(
@@ -31,7 +44,7 @@ app.use(
 );
 
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true })); //allow us to do everything related to json format
 //variables for session
 app.use(
   session({
@@ -44,13 +57,6 @@ app.use(
     },
   })
 );
-
-const db = mysql.createConnection({
-  user: "root",
-  host: "localhost",
-  password: "oyo8Doro16!",
-  database: "property_rental",
-});
 
 app.post("/register", (req, res) => {
   const username = req.body.username;
@@ -152,4 +158,37 @@ app.post("/update", upload.single("file"), (req, res) => {
 
 app.listen(PORT, () => {
   console.log("SERVER ACTIVATED");
+});
+
+///////Property Ad Creation/////////
+
+app.post("/create", (req, res) => {
+  const description = req.body.description;
+  const rent = req.body.rent;
+  const sqlInsert = "INSERT INTO property_ad (description, rent) VALUES (?,?)";
+  db.query(sqlInsert, [description, rent], (err, res) => {
+    console.log(res);
+  });
+});
+
+////Property Ad Display///////
+
+app.get("/rent", (req, res) => {
+  const sqlGet = "SELECT * FROM property_rental.property_ad";
+  db.query(sqlGet, (err, result) => {
+    res.send(result);
+  });
+});
+
+//Ad Application
+
+app.post("/rent", (req, res) => {
+  const id_property_ad = req.body.id_property_ad;
+  const applicant_id = req.body.applicant_id;
+
+  const adApply =
+    "INSERT INTO property_ad_application (id_property_ad, id_user_customer) VALUES (?,?)";
+  db.query(adApply, [id_property_ad, applicant_id], (err, res) => {
+    console.log(err);
+  });
 });

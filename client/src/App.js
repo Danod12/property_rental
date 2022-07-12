@@ -1,13 +1,14 @@
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { LoginContext } from "./components/Contexts/LoginContext";
-import { useState } from "react";
 
+import React, { useState } from "react";
 import LandingMain from "./pages/Landing_main";
 import Rent from "./pages/Rent";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Update from "./pages/Update";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
+import Create_ad from "./pages/Create_ad";
 
 const Nav = ({ userId }) => (
   <ul>
@@ -24,7 +25,10 @@ const Nav = ({ userId }) => (
       <Link to={`/profile/${userId}`}>Profile</Link>
     </li>
     <li>
-      <Link to={"update"}>Update Profile</Link>
+      <Link to={"/update"}>Update Profile</Link>
+    </li>
+    <li>
+      <Link to={"/create"}>Create Ad</Link>
     </li>
   </ul>
 );
@@ -39,6 +43,7 @@ function App() {
         <Nav userId={userId} />
         <Route exact path="/" component={LandingMain}></Route>
         <Route path="/rent" component={Rent}></Route>
+        <Route path="/create" component={Create_ad}></Route>
 
         <LoginContext.Provider value={{ isAuth, setIsAuth, userId, setUserId }}>
           <Route path="/login" component={Login}></Route>
