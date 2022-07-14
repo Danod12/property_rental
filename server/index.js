@@ -181,16 +181,22 @@ app.get("/rent", (req, res) => {
 });
 
 //Ad Application
+//*******NEED TO MAKE A DUPLICATE ERROR MESSAGE */
 
 app.post("/rent", (req, res) => {
   const id_property_ad = req.body.id_property_ad;
   const applicant_id = req.body.applicant_id;
+  const verification = req.body.verification;
 
   const adApply =
-    "INSERT INTO property_ad_application (id_property_ad, id_user_customer) VALUES (?,?)";
-  db.query(adApply, [id_property_ad, applicant_id], (err, res) => {
-    console.log(err);
-  });
+    "INSERT INTO property_ad_application (id_property_ad, id_user_customer, verification) VALUES (?,?,?)";
+  db.query(
+    adApply,
+    [id_property_ad, applicant_id, verification],
+    (err, res) => {
+      console.log(err);
+    }
+  );
 });
 
 //Income Verification
@@ -216,6 +222,19 @@ app.get("/application/:dbID", (req, res) => {
     " SELECT verification_token FROM property_rental.user_customer WHERE (id) = ?";
 
   db.query(pullVerificationToken, [id], (err, result) => {
+    res.send(result);
+    console.log(result);
+  });
+});
+
+//Finding Monthly Rent
+
+app.get("/monthlyRent/:id_property_ad", (req, res) => {
+  const id_property_ad = req.params.id_property_ad;
+
+  const pullMonthlyRent =
+    "SELECT (rent) FROM property_rental.property_ad WHERE (id_property_ad) = (?)";
+  db.query(pullMonthlyRent, [id_property_ad], (err, result) => {
     res.send(result);
     console.log(result);
   });
