@@ -192,3 +192,31 @@ app.post("/rent", (req, res) => {
     console.log(err);
   });
 });
+
+//Income Verification
+
+app.post("/verifyIncome", (req, res) => {
+  const verification_token = req.body.verification_token;
+  console.log(verification_token);
+  const userID = req.body.id;
+  console.log(userID);
+
+  const addIncome =
+    "UPDATE user_customer SET verification_token = (?) WHERE (id) = (?)";
+
+  db.query(addIncome, [verification_token, userID], (err, res) => {
+    console.log(err);
+  });
+});
+
+app.get("/application/:dbID", (req, res) => {
+  const id = req.params.dbID;
+
+  const pullVerificationToken =
+    " SELECT verification_token FROM property_rental.user_customer WHERE (id) = ?";
+
+  db.query(pullVerificationToken, [id], (err, result) => {
+    res.send(result);
+    console.log(result);
+  });
+});

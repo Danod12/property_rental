@@ -19,13 +19,10 @@
   "transactions": [
     {
       "account_id": "BxBXxLj1m4HMXBm9WZZmCWVbPjX16EHwv99vp",
-      "amount": 2307.21,
+      "amount": 4307.21,
       "iso_currency_code": "USD",
       "unofficial_currency_code": null,
-      "category": [
-        "Shops",
-        "Computers and Electronics"
-      ],
+      "category": ["Shops", "Computers and Electronics"],
       "category_id": "19013000",
       "check_number": null,
       "date": "2017-01-25",
@@ -68,10 +65,7 @@
       "amount": 2000.21,
       "iso_currency_code": "USD",
       "unofficial_currency_code": null,
-      "category": [
-        "Shops",
-        "Computers and Electronics"
-      ],
+      "category": ["Shops", "Computers and Electronics"],
       "category_id": "19013000",
       "check_number": null,
       "date": "2017-02-29",
@@ -110,13 +104,10 @@
     },
     {
       "account_id": "BxBXxLj1m4HMXBm9WZZmCWVbPjX16EHwv99vp",
-      "amount": 200.00,
+      "amount": 200.0,
       "iso_currency_code": "USD",
       "unofficial_currency_code": null,
-      "category": [
-        "Shops",
-        "Computers and Electronics"
-      ],
+      "category": ["Shops", "Computers and Electronics"],
       "category_id": "19013000",
       "check_number": null,
       "date": "2017-03-29",
@@ -158,10 +149,7 @@
       "amount": 1000.21,
       "iso_currency_code": "USD",
       "unofficial_currency_code": null,
-      "category": [
-        "Shops",
-        "Computers and Electronics"
-      ],
+      "category": ["Shops", "Computers and Electronics"],
       "category_id": "19013000",
       "check_number": null,
       "date": "2017-04-29",
@@ -200,17 +188,8 @@
     }
   ],
   "item": {
-    "available_products": [
-      "balance",
-      "identity",
-      "investments"
-    ],
-    "billed_products": [
-      "assets",
-      "auth",
-      "liabilities",
-      "transactions"
-    ],
+    "available_products": ["balance", "identity", "investments"],
+    "billed_products": ["assets", "auth", "liabilities", "transactions"],
     "consent_expiration_time": null,
     "error": null,
     "institution_id": "ins_3",

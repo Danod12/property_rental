@@ -56,13 +56,23 @@ function Update() {
   let novIncome = 0;
   let decIncome = 0;
 
-  const showIncome = () => {
-    console.log(incomeVer);
-  };
-
   const incomeCalc = () => {
     transactionData.forEach(pullTransactionAmount); //cycling through array with pullTransactionAmount
     setIncomeVer(monthlyIncome);
+  };
+
+  const submitIncome = () => {
+    for (let i = 0; i < incomeVer.length; i++) {
+      totalIncome = totalIncome + incomeVer[i];
+    }
+    averageMonthlyIncome = totalIncome / 12;
+    console.log(totalIncome);
+    console.log(averageMonthlyIncome);
+
+    Axios.post("http://localhost:3001/verifyIncome", {
+      verification_token: averageMonthlyIncome,
+      id: dbID,
+    }).then(() => {});
   };
 
   function pullTransactionAmount(item) {
@@ -132,7 +142,7 @@ function Update() {
       {status && <h4>{status}</h4>}
 
       <button onClick={incomeCalc}> Verify Income</button>
-      <button onClick={showIncome}> Show Income</button>
+      <button onClick={submitIncome}> Submit Income</button>
     </div>
   );
 }
