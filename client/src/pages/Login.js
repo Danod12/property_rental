@@ -3,12 +3,6 @@ import Axios from "axios";
 import { LoginContext } from "../components/Contexts/LoginContext";
 
 export default function Login() {
-  const [userNameReg, setUserNameReg] = useState("");
-  const [passwordReg, setPasswordReg] = useState("");
-  const [firstNameReg, setFirstNameReg] = useState("");
-  const [lastNameReg, setLastNameReg] = useState("");
-  const [emailReg, setEmailReg] = useState("");
-
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,18 +12,6 @@ export default function Login() {
   const { setUserId } = useContext(LoginContext);
 
   Axios.defaults.withCredentials = true;
-
-  const register = () => {
-    Axios.post("http://localhost:3001/register", {
-      username: userNameReg,
-      password: passwordReg,
-      firstName: firstNameReg,
-      lastName: lastNameReg,
-      email: emailReg,
-    }).then((response) => {
-      console.log(response.data);
-    });
-  };
 
   const login = () => {
     Axios.post("http://localhost:3001/login", {
@@ -42,6 +24,7 @@ export default function Login() {
         setLoginStatus(response.data[0].username);
         setIsAuth(true);
         setUserId(response.data[0].id);
+        console.log(response.data[0].id);
       }
     });
   };
@@ -49,7 +32,7 @@ export default function Login() {
   useEffect(() => {
     Axios.get("http://localhost:3001/login").then((response) => {
       if (response.data.loggedIn === true) {
-        setLoginStatus(response.data.user[0].username);
+        setLoginStatus(response.data[0].username);
       }
     });
   }, []);
@@ -57,53 +40,8 @@ export default function Login() {
   return (
     <>
       <div className="login_reg">
-        <div className="registration">
-          <h1>Registration</h1>
-          <label>Username</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setUserNameReg(e.target.value);
-            }}
-          ></input>
-          <br></br>
-          <label>Password</label>
-          <input
-            type="password"
-            onChange={(e) => {
-              setPasswordReg(e.target.value);
-            }}
-          ></input>
-          <br></br>
-          <label>First Name</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setFirstNameReg(e.target.value);
-            }}
-          ></input>
-          <br></br>
-          <label> Last Name</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setLastNameReg(e.target.value);
-            }}
-          ></input>
-          <br></br>
-          <label> E-mail</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setEmailReg(e.target.value);
-            }}
-          ></input>
-          <br></br>
-          <button onClick={register}>Register</button>
-        </div>
-
         <div className="login">
-          <h1>Login</h1>
+          <h1> Customer Login</h1>
           <input
             type="text"
             placeholder="username"

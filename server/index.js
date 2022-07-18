@@ -58,6 +58,8 @@ app.use(
   })
 );
 
+//Customer Register //
+
 app.post("/register", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -76,11 +78,39 @@ app.post("/register", (req, res) => {
       [username, hash, firstName, lastName, email],
       (err, result) => {
         console.log(err);
-        setdbID(result.data.id);
       }
     );
   });
 });
+
+//Rental Agency Registration
+
+app.post("/register_rental_agency", (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  const name = req.body.name;
+  const registration_number = req.body.registration;
+  const email = req.body.email;
+
+  bcrypt.hash(password, saltRounds, (err, hash) => {
+    if (err) {
+      console.log(err);
+    }
+
+    const agencyReg =
+      "INSERT INTO user_rental_agency (username, password, name, registration_number,email) VALUES (?,?,?,?,?) ";
+
+    db.query(
+      agencyReg,
+      [username, hash, name, registration_number, email],
+      (err, result) => {
+        console.log(err);
+      }
+    );
+  });
+});
+
+//Login Handling
 
 app.get("/login", (req, res) => {
   if (req.session.user) {
@@ -95,8 +125,8 @@ app.post("/login", (req, res) => {
   const password = req.body.password;
 
   db.query(
-    "SELECT * FROM user_customer WHERE username = ?;", //first checking to see if a user name is in the database
-    username,
+    "SELECT id, password, username FROM user_customer WHERE username = ? UNION SELECT id, password,username FROM user_rental_agency WHERE username =? ;", //first checking to see if a user name is in the database
+    [username, username],
     (err, result) => {
       if (err) {
         console.log({ err: err });
@@ -106,8 +136,9 @@ app.post("/login", (req, res) => {
         bcrypt.compare(password, result[0].password, (error, response) => {
           if (response) {
             req.session.user = result; //creating a session with the name user set by the result we get from the database
-            res.send(result);
+            console.log(result);
             console.log(req.session.user);
+            res.send(result);
           } else {
             res.send({ message: "Wrong username combo" });
           }
@@ -165,9 +196,13 @@ app.listen(PORT, () => {
 app.post("/create", (req, res) => {
   const description = req.body.description;
   const rent = req.body.rent;
-  const sqlInsert = "INSERT INTO property_ad (description, rent) VALUES (?,?)";
-  db.query(sqlInsert, [description, rent], (err, res) => {
+  const rental_agency_id = req.body.rental_agency_id;
+
+  const sqlInsert =
+    "INSERT INTO property_ad (description, rent, rental_agency_id) VALUES (?,?,?)";
+  db.query(sqlInsert, [description, rent, rental_agency_id], (err, res) => {
     console.log(res);
+    console.log(err);
   });
 });
 
@@ -181,7 +216,7 @@ app.get("/rent", (req, res) => {
 });
 
 //Ad Application
-//*******NEED TO MAKE A DUPLICATE ERROR MESSAGE */
+//*******NEED TO MAKE A DUPLICATE ERROR MESSAGE
 
 app.post("/rent", (req, res) => {
   const id_property_ad = req.body.id_property_ad;
@@ -237,5 +272,32 @@ app.get("/monthlyRent/:id_property_ad", (req, res) => {
   db.query(pullMonthlyRent, [id_property_ad], (err, result) => {
     res.send(result);
     console.log(result);
+  });
+});
+
+////MyAds Display
+
+app.get("/adverts/:id_property_ad", (req, res) => {
+  const rental_agency_id = req.params.id_property_ad;
+
+  const myAds =
+    "SELECT * FROM property_rental.property_ad WHERE rental_agency_id = (?)";
+  db.query(myAds, [rental_agency_id], (err, result) => {
+    res.send(result);
+    console.log(err);
+  });
+});
+
+///Individual Ad Display
+
+app.get("/advert/:id_property_ad", (req, res) => {
+  id_property_ad = req.params.id_property_ad;
+
+  const getIndAd =
+    "SELECT description, rent FROM property_rental.property_ad WHERE id_property_ad = (?)";
+  db.query(getIndAd, [id_property_ad], (err, result) => {
+    console.log(id_property_ad);
+    res.send(result);
+    console.log(err);
   });
 });
