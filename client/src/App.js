@@ -15,6 +15,8 @@ import MyAd from "./pages/MyAd";
 import Registration_Landing from "./pages/Registration_Landing";
 import Ad_Highlight from "./pages/Ad_highlight";
 
+import Ad_Indv from "./pages/Ad_indv";
+
 const Nav = ({ userId }) => (
   <ul>
     <li>
@@ -57,7 +59,7 @@ function App() {
         <Route path="/rent" component={Rent}></Route>
         <Route path="/create" component={Create_ad}></Route>
         <Route path="/registration" component={Registration_Landing}></Route>
-        <Route path="/myadverts" component={MyAd}></Route>
+        {/* <Route path="/myadverts" component={MyAd}></Route> */}
 
         <LoginContext.Provider value={{ isAuth, setIsAuth, userId, setUserId }}>
           <Route path="/login" component={Login}></Route>
@@ -71,8 +73,11 @@ function App() {
         </LoginContext.Provider>
 
         <AdContext.Provider value={{ adId, setAdId }}>
-          <Route path="/myadverts/:adId">
+          <Route path="/myadverts" exact={true}>
             <Ad_Highlight id_property_ad={adId} />
+            <Route>
+              <Ad_Indv path="/:adId" exact={true} />
+            </Route>
           </Route>
         </AdContext.Provider>
       </Router>

@@ -29,6 +29,7 @@ function MyAd() {
       <button onClick={findAd}>Find My Ads</button>
 
       {myAds.map((val) => {
+        console.log(val);
         return (
           <div>
             <AdIndv

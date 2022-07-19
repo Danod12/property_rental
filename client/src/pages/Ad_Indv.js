@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { AdContext } from "../components/Contexts/AdContext";
+import { Link, useParams } from "react-router-dom";
+function Ad_indv({ description, rent, ID }) {
+  const { adId } = useParams();
 
-export default function Ad_indv({ description, rent, ID }) {
-  const { setAdId } = useContext(AdContext);
-
+  console.log(adId, "hi");
   return (
     <div>
-      Description:{description} Rent: {rent} ID: {ID}:
-      <Link to={`/myadverts/${ID}`}>View Ad</Link>
+      Description:{description} Rent: {rent} adId: {adId}:
+      <Link to={`/myadverts/${adId}`}>View Ad</Link>
     </div>
   );
 }
+
+export default Ad_indv;

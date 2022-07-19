@@ -15,7 +15,7 @@ function Rent() {
 
   return (
     <div>
-      This is the motherfucking rent page
+      This is the rent page
       <div>
         {propertyAdList.map((val) => {
           return (
