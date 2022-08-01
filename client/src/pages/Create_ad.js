@@ -6,6 +6,7 @@ function Create_ad() {
   const [adDescription, setAdDescription] = useState("");
   const [adRent, setAdRent] = useState("");
   const [dbIDA, setDbIDA] = useState(null);
+  const [image, setImage] = useState({ preview: "", data: "" });
 
   useEffect(() => {
     Axios.get("http://localhost:3001/login").then((response) => {
@@ -19,14 +20,25 @@ function Create_ad() {
     console.log(dbIDA);
   };
 
-  const submitAd = () => {
-    Axios.post("http://localhost:3001/create", {
+  const submitAd = async (e) => {
+    let formData = new FormData();
+    formData.append("file", image.data);
+
+    Axios.post("http://localhost:3001/create", formData, {
       description: adDescription,
       rent: adRent,
       rental_agency_id: dbIDA,
-    }).then(() => {
-      alert("succesfull insert");
-    });
+    }).then(() => {});
+    console.log(adDescription);
+  };
+
+  const handleFileChange = (e) => {
+    const img = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    };
+
+    setImage(img);
   };
 
   return (
@@ -49,8 +61,11 @@ function Create_ad() {
             setAdRent(e.target.value);
           }}
         ></input>
+        <label>Photos</label>
+        <form>
+          <input type="file" name="file" onChange={handleFileChange} />
+        </form>
         <button onClick={submitAd}>Place Ad</button>
-        <button onClick={viewState}>Check No</button>
       </div>
     </div>
   );

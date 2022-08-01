@@ -10,6 +10,7 @@ function Application({ id_property_ad }) {
   let tokenValue = 0;
 
   const verificationGet = `http://localhost:3001/application/${dbID}`;
+  const rentGet = `http://localhost:3001/monthlyRent/${id_property_ad}`;
 
   useEffect(() => {
     Axios.get("http://localhost:3001/login").then((response) => {
@@ -20,7 +21,19 @@ function Application({ id_property_ad }) {
   }, []);
 
   //submiting application
-  const submitApplication = () => {
+  const submitApplication = async () => {
+    const response = await Axios.get(verificationGet);
+    responseTokenData = response.data[0];
+    tokenValue = responseTokenData.verification_token;
+
+    console.log(tokenValue);
+
+    const rentResponse = await Axios.get(rentGet);
+    responseMonthlyRent = rentResponse.data[0];
+    monthlyRent = responseMonthlyRent.rent;
+
+    console.log(monthlyRent);
+
     if (tokenValue >= monthlyRent) {
       Axios.post("http://localhost:3001/rent", {
         id_property_ad: id_property_ad,
@@ -41,30 +54,11 @@ function Application({ id_property_ad }) {
   };
 
   //finding verification token value
-  const verificationData = async () => {
-    const response = await Axios.get(verificationGet);
-    responseTokenData = response.data[0];
-    tokenValue = responseTokenData.verification_token;
-
-    console.log(tokenValue);
-  };
-
-  const rentGet = `http://localhost:3001/monthlyRent/${id_property_ad}`;
-
-  const monthlyRentCalc = async () => {
-    const rentResponse = await Axios.get(rentGet);
-    responseMonthlyRent = rentResponse.data[0];
-    monthlyRent = responseMonthlyRent.rent;
-
-    console.log(monthlyRent);
-  };
 
   return (
     <div>
       <h1> {id_property_ad}</h1>
       <button onClick={submitApplication}>Submit Application</button>
-      <button onClick={verificationData}>Find Token</button>
-      <button onClick={monthlyRentCalc}>Find Rent</button>
     </div>
   );
 }

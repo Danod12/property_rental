@@ -45,78 +45,77 @@ function App() {
           <LoginContext.Provider
             value={{ isAuth, setIsAuth, userId, setUserId }}
           >
-            {" "}
-            <Nav
-              className="justify-content-center py-4 ms-auto navbar-color"
-              activeKey="1"
-              onSelect={handleSelect}
-            >
-              <Nav.Item>
-                <Nav.Link class="navbar-brand" href="#">
-                  Home
-                </Nav.Link>
-              </Nav.Item>
-
-              <Nav.Item>
-                <Nav.Link as={Link} to={"/rent"}>
-                  Rent
-                </Nav.Link>
-              </Nav.Item>
-
-              <Nav.Item>
-                <Nav.Link as={Link} to={"/create"}>
-                  Create Ad
-                </Nav.Link>
-              </Nav.Item>
-
-              <NavDropdown title="Login" id="nav-dropdown">
-                <NavDropdown.Item>
-                  <Nav.Link as={Link} to={"/login"}>
-                    {" "}
-                    Renter
-                  </Nav.Link>
-                </NavDropdown.Item>
-
-                <NavDropdown.Item>Rental Agency</NavDropdown.Item>
-              </NavDropdown>
-
-              <NavDropdown title="Register" id="nav-dropdown">
-                <NavDropdown.Item>
-                  <Nav.Link as={Link} to={"/registration/customer"}>
-                    Renter
-                  </Nav.Link>
-                </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <Nav.Link as={Link} to={"/registration/rental_agency"}>
-                    Rental Agency
-                  </Nav.Link>
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-            <Route exact path="/" component={LandingMain}></Route>
-            <Route path="/rent" component={Rent}></Route>
-            <Route path="/create" component={Create_ad}></Route>
-            <Route
-              path="/registration"
-              component={Registration_Customer}
-            ></Route>
-            <Route path="/login" component={Login}></Route>
-            {/* <Route path="/myadverts" component={MyAd}></Route> */}
-            <ProtectedRoutes
-              path="/profile/:userId"
-              component={Profile}
-              isAuth={isAuth}
-            />
-            <ProtectedRoutes
-              path="/update"
-              component={Update}
-              isAuth={isAuth}
-            />
             <AdContext.Provider value={{ userId, setUserId, adId, setAdId }}>
+              {" "}
+              <Nav
+                className="justify-content-center py-4 ms-auto navbar-color"
+                activeKey="1"
+                onSelect={handleSelect}
+              >
+                <Nav.Item>
+                  <Nav.Link as={Link} to={"/"}>
+                    Home
+                  </Nav.Link>
+                </Nav.Item>
+
+                <Nav.Item>
+                  <Nav.Link as={Link} to={"/rent"}>
+                    Rent
+                  </Nav.Link>
+                </Nav.Item>
+
+                <Nav.Item>
+                  <Nav.Link as={Link} to={"/create"}>
+                    Create Ad
+                  </Nav.Link>
+                </Nav.Item>
+
+                <Nav.Item>
+                  <Nav.Link as={Link} to={"/update"}>
+                    Update Profile
+                  </Nav.Link>
+                </Nav.Item>
+
+                <Nav.Item>
+                  <Nav.Link as={Link} to={"/myadverts"}>
+                    My Ads
+                  </Nav.Link>
+                </Nav.Item>
+
+                <Nav.Item>
+                  <Nav.Link as={Link} to={"/login"}>
+                    Login
+                  </Nav.Link>
+                </Nav.Item>
+
+                <Nav.Item>
+                  <Nav.Link as={Link} to={"/registration/customer"}>
+                    Register
+                  </Nav.Link>
+                </Nav.Item>
+              </Nav>
+              <Route exact path="/" component={LandingMain}></Route>
+              <Route path="/rent" component={Rent}></Route>
+              <Route path="/create" component={Create_ad}></Route>
+              <Route
+                path="/registration"
+                component={Registration_Customer}
+              ></Route>
+              <Route path="/login" component={Login}></Route>
+              {/* <Route path="/myadverts" component={MyAd}></Route> */}
+              <ProtectedRoutes
+                path="/profile/:userId"
+                component={Profile}
+                isAuth={isAuth}
+              />
+              <ProtectedRoutes
+                path="/update"
+                component={Update}
+                isAuth={isAuth}
+              />
               <Route exact={true} path="/myadverts">
                 <MyAd />
               </Route>
-
               <Route path={`/myadverts/:adId`}>
                 <Ad_Highlight id_property_ad={adId} />
               </Route>

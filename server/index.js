@@ -192,18 +192,40 @@ app.listen(PORT, () => {
 });
 
 ///////Property Ad Creation/////////
+const storagePhoto = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "Property_Photos");
+  }, //first argument is for errors during sending
 
-app.post("/create", (req, res) => {
+  filenamePh: (req, file, cb) => {
+    console.log(file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+}); //where the specification of the file is determined
+
+const uploadPhoto = multer({ storage: storagePhoto });
+
+app.set("view engine", "ejs");
+
+app.get("/create", (req, res) => {
+  res.render("file");
+});
+
+app.post("/create", uploadPhoto.single("file"), (req, res) => {
   const description = req.body.description;
   const rent = req.body.rent;
   const rental_agency_id = req.body.rental_agency_id;
+  const fileNamePhoto = req.file.filenamePh;
 
   const sqlInsert =
-    "INSERT INTO property_ad (description, rent, rental_agency_id) VALUES (?,?,?)";
-  db.query(sqlInsert, [description, rent, rental_agency_id], (err, res) => {
-    console.log(res);
-    console.log(err);
-  });
+    "INSERT INTO property_ad (description, rent, rental_agency_id, property_photo) VALUES (?,?,?,?)";
+  db.query(
+    sqlInsert,
+    [description, rent, rental_agency_id, fileNamePhoto],
+    (err, res) => {
+      console.log(err);
+    }
+  );
 });
 
 ////Property Ad Display///////

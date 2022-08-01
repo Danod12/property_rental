@@ -25,7 +25,7 @@ function Rent() {
 
                 <div class="row ">
                   <div class="col-md-5">
-                    <img src={PropertyPhoto} alt="property photo"></img>
+                    <img src={PropertyPhoto}></img>
                   </div>
                   <div class="col-md-4  form-title-ad ">
                     Description: {val.description} | Rent: {val.rent} | AdNo:{" "}
