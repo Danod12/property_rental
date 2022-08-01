@@ -6,8 +6,8 @@ function Ad_indv({ description, rent, ID }) {
   console.log(adId, "hi");
   return (
     <div>
-      Description:{description} Rent: {rent} adId: {adId}:
-      <Link to={`/myadverts/${adId}`}>View Ad</Link>
+      Description:{description} Rent: {rent} adId: {ID}:
+      <Link to={`/myadverts/${ID}`}>View Ad</Link>
     </div>
   );
 }

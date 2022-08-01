@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import Axios from "axios";
 import { LoginContext } from "../components/Contexts/LoginContext";
+import companyLogo from "../assets/images/logo.png";
 
 export default function Login() {
   const [username, setUserName] = useState("");
@@ -25,6 +26,7 @@ export default function Login() {
         setIsAuth(true);
         setUserId(response.data[0].id);
         console.log(response.data[0].id);
+        console.log("hi");
       }
     });
   };
@@ -38,29 +40,55 @@ export default function Login() {
   }, []);
 
   return (
-    <>
-      <div className="login_reg">
-        <div className="login">
-          <h1> Customer Login</h1>
-          <input
-            type="text"
-            placeholder="username"
-            onChange={(e) => {
-              setUserName(e.target.value);
-            }}
-          ></input>
-
-          <input
-            type="password"
-            placeholder="password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          ></input>
-          <button onClick={login}>Login</button>
+    <div class="hero-registration-customer vh-100 d-flex align-items-center hero-sign-up-background">
+      <div class="container base-sign-container col-6">
+        <div class="row justify-content-center mt-3">
+          <div class="col-md-3"></div>
         </div>
+
+        <div class="row justify-content-center mt-3">
+          <div class="col-md-3">
+            <img class="companyLogo" src={companyLogo}></img>
+            <br></br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 form-title">
+            <label>Username</label>
+            <br></br>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="username"
+              onChange={(e) => {
+                setUserName(e.target.value);
+              }}
+            ></input>
+            <br></br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 form-title">
+            <label>Password</label>
+            <br></br>
+            <input
+              class="form-control"
+              type="password"
+              placeholder="password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            ></input>
+            <br></br>
+          </div>
+        </div>
+
+        <button class="form-control submit-tag" onClick={login}>
+          Login
+        </button>
       </div>
-      <h1>{loginStatus}</h1>
-    </>
+    </div>
   );
 }

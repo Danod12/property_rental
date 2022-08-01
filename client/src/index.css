@@ -1,13 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100&display=swap");
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Barlow, "sans-serif";
+  line-height: 1.7;
+}
+/*Home Page */
+.hero {
+  background-image: url(../src/assets/images/landing.png);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  z-index: 2;
 }
 
+.hero::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+
+  left: 0;
+  background-color: rgba(21, 20, 51, 0.1);
+  z-index: -1;
+}
+
+.home-text {
+  color: whitesmoke;
+}
+
+.navbar-color {
+  color: transparent !important;
+}
+
+/*Registration */
+
+.hero-registration-customer {
+  background-image: url(../src/assets/images/registration-hero.webp);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  z-index: 2;
+}
+
+.base-sign-container {
+  background-color: whitesmoke;
+  opacity: 0.9;
+  border-radius: 8px;
+  padding-bottom: 30px;
+}
+
+.companyLogo {
+  height: 160px;
+}
+
+.form-title {
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.form-control {
+  padding-left: 175px;
+  padding-right: 175px;
+  border-radius: 6px;
+}
+
+.submit-tag:hover {
+  background-color: #005051;
+  color: whitesmoke;
+}
+
+.hero-ad {
+  padding-bottom: 20px;
+}
+
+.base-sign-container-ad {
+  background-color: whitesmoke;
+  opacity: 0.9;
+  border-radius: 8px;
+  padding-bottom: 30px;
+}
+
+/*Ad */
+
+.form-title-ad {
+  align-items: flex-end;
+}
+
+.footer-top {
+  padding-bottom: 90px;
+  padding: 10px;
+  background-color: white;
+}
+
+.footer-logo {
+  height: 250px;
+}
+
+.text-position-about {
+  padding: 60px 0;
+  padding-right: 10%;
+}
+
+.text-position-contact {
+  padding: 60px 0;
+}
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
