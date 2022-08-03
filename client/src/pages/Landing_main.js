@@ -7,7 +7,7 @@ export default function Landing_main() {
           <div class="col-lg-7 home-text">
             <h1 class="display-4 ">Welcome Home</h1>
             <p>Property Rental. Hassel Free. </p>
-            <a href="#" class="btn btn-primary">
+            <a href="/registration/customer" class="btn btn-primary">
               Register
             </a>
           </div>

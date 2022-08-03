@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import Axios from "axios";
 import { LoginContext } from "../components/Contexts/LoginContext";
-import companyLogo from "../assets/images/logo.png";
+import companyLogo from "../assets/images/main_logo.png";
 
 export default function Login() {
   const [username, setUserName] = useState("");
@@ -26,7 +26,6 @@ export default function Login() {
         setIsAuth(true);
         setUserId(response.data[0].id);
         console.log(response.data[0].id);
-        console.log("hi");
       }
     });
   };
@@ -40,8 +39,8 @@ export default function Login() {
   }, []);
 
   return (
-    <div class="hero-registration-customer vh-100 d-flex align-items-center hero-sign-up-background">
-      <div class="container base-sign-container col-6">
+    <div class="hero-login  vh-120 d-flex align-items-center">
+      <div class="container base-sign-container-login bg-white col-6">
         <div class="row justify-content-center mt-3">
           <div class="col-md-3"></div>
         </div>
@@ -84,6 +83,7 @@ export default function Login() {
             <br></br>
           </div>
         </div>
+        <h1>{loginStatus}</h1>
 
         <button class="form-control submit-tag" onClick={login}>
           Login

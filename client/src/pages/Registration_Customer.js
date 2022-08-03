@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import { Google, Facebook } from "react-bootstrap-icons";
 
-import companyLogo from "../assets/images/logo.png";
+import companyLogo from "../assets/images/main_logo.png";
 
 function Registration_Customer() {
   const [userNameReg, setUserNameReg] = useState("");
@@ -24,7 +25,7 @@ function Registration_Customer() {
 
   return (
     <div class="hero-registration-customer vh-100 d-flex align-items-center hero-sign-up-background">
-      <div class="container base-sign-container col-6">
+      <div class="container bg-white base-sign-container col-6">
         <div class="row justify-content-center mt-3">
           <div class="col-md-3"></div>
         </div>
@@ -35,6 +36,45 @@ function Registration_Customer() {
             <br></br>
           </div>
         </div>
+
+        <div class="row justify-content-center mt-3">
+          <div class="col-md-8 text-center ">
+            <p class="social-sign link-style">
+              <Google color="red" size={30} />
+              <a
+                class="link-style"
+                style={{ textDecoration: "none" }}
+                href="https://accounts.google.com/login"
+              >
+                Sign-up with Google{" "}
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div class="row justify-content-center mt-3">
+          <div class="col-md-8 text-center ">
+            <p class="social-sign link-style">
+              <Google color="royalblue" size={30} />
+              <a
+                class="link-style"
+                style={{ textDecoration: "none" }}
+                href="www.facebook.come"
+              >
+                Sign-up with Facebook{" "}
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div
+          style={{
+            borderTop: "2px solid lightgrey ",
+            marginLeft: 20,
+            marginRight: 20,
+          }}
+        ></div>
+        <br></br>
 
         <div class="row">
           <div class="col-md-12 form-title">
@@ -60,36 +100,6 @@ function Registration_Customer() {
               type="password"
               onChange={(e) => {
                 setPasswordReg(e.target.value);
-              }}
-            ></input>
-            <br></br>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12 form-title">
-            <label>First Name</label>
-            <br></br>
-            <input
-              class="form-control"
-              type="text"
-              onChange={(e) => {
-                setFirstNameReg(e.target.value);
-              }}
-            ></input>
-            <br></br>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12 form-title">
-            <label> Last Name</label>
-            <br></br>
-            <input
-              class="form-control"
-              type="text"
-              onChange={(e) => {
-                setLastNameReg(e.target.value);
               }}
             ></input>
             <br></br>

@@ -46,54 +46,11 @@ function App() {
             value={{ isAuth, setIsAuth, userId, setUserId }}
           >
             <AdContext.Provider value={{ userId, setUserId, adId, setAdId }}>
-              {" "}
-              <Nav
-                className="justify-content-center py-4 ms-auto navbar-color"
-                activeKey="1"
-                onSelect={handleSelect}
-              >
-                <Nav.Item>
-                  <Nav.Link as={Link} to={"/"}>
-                    Home
-                  </Nav.Link>
-                </Nav.Item>
-
-                <Nav.Item>
-                  <Nav.Link as={Link} to={"/rent"}>
-                    Rent
-                  </Nav.Link>
-                </Nav.Item>
-
-                <Nav.Item>
-                  <Nav.Link as={Link} to={"/create"}>
-                    Create Ad
-                  </Nav.Link>
-                </Nav.Item>
-
-                <Nav.Item>
-                  <Nav.Link as={Link} to={"/update"}>
-                    Update Profile
-                  </Nav.Link>
-                </Nav.Item>
-
-                <Nav.Item>
-                  <Nav.Link as={Link} to={"/myadverts"}>
-                    My Ads
-                  </Nav.Link>
-                </Nav.Item>
-
-                <Nav.Item>
-                  <Nav.Link as={Link} to={"/login"}>
-                    Login
-                  </Nav.Link>
-                </Nav.Item>
-
-                <Nav.Item>
-                  <Nav.Link as={Link} to={"/registration/customer"}>
-                    Register
-                  </Nav.Link>
-                </Nav.Item>
-              </Nav>
+              {isAuth ? (
+                <Navbar_Customer userId={userId} />
+              ) : (
+                <Navbar_Home userId={userId} />
+              )}
               <Route exact path="/" component={LandingMain}></Route>
               <Route path="/rent" component={Rent}></Route>
               <Route path="/create" component={Create_ad}></Route>
