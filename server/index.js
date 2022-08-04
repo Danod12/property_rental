@@ -150,7 +150,7 @@ app.post("/login", (req, res) => {
   );
 });
 
-// Image Uploading
+// Woek Reference Upload
 
 const multer = require("multer");
 
@@ -187,17 +187,11 @@ app.post("/update", upload.single("file"), (req, res) => {
   );
 });
 
-app.listen(PORT, () => {
-  console.log("SERVER ACTIVATED");
-});
-
 ///////Property Ad Creation/////////
 const storagePhoto = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "Property_Photos");
-  }, //first argument is for errors during sending
+  destination: "../client/src/assets/property_photos",
 
-  filenamePh: (req, file, cb) => {
+  filename: (req, file, cb) => {
     console.log(file);
     cb(null, Date.now() + path.extname(file.originalname));
   },
@@ -207,15 +201,22 @@ const uploadPhoto = multer({ storage: storagePhoto });
 
 app.set("view engine", "ejs");
 
-app.get("/create", (req, res) => {
+app.get("/upload_prop_photo", (req, res) => {
   res.render("file");
 });
 
-app.post("/create", uploadPhoto.single("file"), (req, res) => {
+app.post("/upload_prop_photo", uploadPhoto.single("file"), (req, res) => {
+  console.log("here");
+  const fileN = req.file.filename;
+  console.log("here too");
+  res.send(fileN);
+});
+
+app.post("/create", (req, res) => {
   const description = req.body.description;
   const rent = req.body.rent;
   const rental_agency_id = req.body.rental_agency_id;
-  const fileNamePhoto = req.file.filenamePh;
+  const fileNamePhoto = req.body.fileNamePhoto;
 
   const sqlInsert =
     "INSERT INTO property_ad (description, rent, rental_agency_id, property_photo) VALUES (?,?,?,?)";
@@ -322,4 +323,8 @@ app.get("/advert/:id_property_ad", (req, res) => {
     res.send(result);
     console.log(err);
   });
+});
+
+app.listen(PORT, () => {
+  console.log("SERVER ACTIVATED");
 });

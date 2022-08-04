@@ -18,6 +18,8 @@ function Update() {
     });
   }, []);
 
+  /* Work Reference Update */
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,6 +40,7 @@ function Update() {
 
     setImage(img);
   };
+  /* Income Verification*/
 
   const transactionData = IncomeData.transactions; //transaction data array
   let monthlyIncome = [];
@@ -77,6 +80,7 @@ function Update() {
 
   function pullTransactionAmount(item) {
     const objectHolder = item;
+
     const amounts = objectHolder.amount;
     const dates = objectHolder.date;
     let trimmedDate = "";
@@ -142,6 +146,7 @@ function Update() {
       {status && <h4>{status}</h4>}
 
       <button onClick={incomeCalc}> Verify Income</button>
+
       <button onClick={submitIncome}> Submit Income</button>
     </div>
   );

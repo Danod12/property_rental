@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Axios from "axios";
+import companyLogo from "../assets/images/main_logo.png";
 
 function Registration_Rental_Agency() {
   const [userNameRegAgent, setUserNameRegAgent] = useState("");
@@ -22,51 +23,94 @@ function Registration_Rental_Agency() {
   };
 
   return (
-    <div className="registration">
-      <h1>Registration</h1>
-      <label>Username</label>
-      <input
-        type="text"
-        onChange={(e) => {
-          setUserNameRegAgent(e.target.value);
-        }}
-      ></input>
-      <br></br>
-      <label>Password</label>
-      <input
-        type="password"
-        onChange={(e) => {
-          setPasswordRegAgent(e.target.value);
-        }}
-      ></input>
-      <br></br>
-      <label>Agency Name</label>
-      <input
-        type="text"
-        onChange={(e) => {
-          setNameRegAgent(e.target.value);
-        }}
-      ></input>
-      <br></br>
-      <label>Registration Number</label>
-      <input
-        type="text"
-        onChange={(e) => {
-          setRegNumAgent(e.target.value);
-        }}
-      ></input>
-      <br></br>
-      <label>Email</label>
-      <input
-        type="text"
-        onChange={(e) => {
-          setEmailRegAgent(e.target.value);
-        }}
-      ></input>
+    <div>
+      <div class="hero-registration-rental-agency vh-100 d-flex align-items-center ">
+        <div class="container bg-white base-sign-container col-6">
+          <div class="row justify-content-center mt-3">
+            <div class="col-md-3"></div>
+          </div>
 
-      <br></br>
+          <div class="row justify-content-center mt-3">
+            <div class="col-md-4">
+              <img class="companyLogo" src={companyLogo}></img>
+              <br></br>
+            </div>
+          </div>
 
-      <button onClick={registerAgency}>Register</button>
+          <div class="row">
+            <div class="col-md-12 form-title">
+              <label class="form-title">Username</label>
+              <input
+                class="form-control"
+                type="text"
+                onChange={(e) => {
+                  setUserNameRegAgent(e.target.value);
+                }}
+              ></input>
+              <br></br>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 form-title">
+              <label class="form-title">Password</label>
+              <input
+                class="form-control"
+                type="password"
+                onChange={(e) => {
+                  setPasswordRegAgent(e.target.value);
+                }}
+              ></input>
+              <br></br>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 form-title">
+              <label class="form-title">Agency Name</label>
+              <input
+                class="form-control"
+                type="text"
+                onChange={(e) => {
+                  setNameRegAgent(e.target.value);
+                }}
+              ></input>
+              <br></br>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 form-title">
+              <label class="form-title">Registration Number</label>
+              <input
+                class="form-control"
+                type="text"
+                onChange={(e) => {
+                  setRegNumAgent(e.target.value);
+                }}
+              ></input>
+              <br></br>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 form-title">
+              <label class="form-title">Email</label>
+              <input
+                class="form-control"
+                type="text"
+                onChange={(e) => {
+                  setEmailRegAgent(e.target.value);
+                }}
+              ></input>
+              <br></br>
+            </div>
+          </div>
+          <button class="form-control submit-tag" onClick={registerAgency}>
+            Register
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

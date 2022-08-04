@@ -31,7 +31,7 @@ function Registration_Customer() {
         </div>
 
         <div class="row justify-content-center mt-3">
-          <div class="col-md-3">
+          <div class="col-md-4">
             <img class="companyLogo" src={companyLogo}></img>
             <br></br>
           </div>

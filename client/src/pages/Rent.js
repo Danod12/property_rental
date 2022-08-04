@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import Application from "../components/application/Application";
-import PropertyPhoto from "../assets/images/property_photo.jpeg";
 
 function Rent() {
   const [propertyAdList, setPropertyAdList] = useState([]);
@@ -23,11 +22,17 @@ function Rent() {
               <div class="container base-sign-container-ad col-9">
                 <div class="row mt-5"></div>
 
-                <div class="row ">
-                  <div class="col-md-5">
-                    <img src={PropertyPhoto}></img>
+                <div class="row justify-content-center">
+                  <div class="col-md-4 align-items-center">
+                    <img
+                      class="ad_image"
+                      src={require(`../assets/property_photos/${val.property_photo}`)}
+                      alt="interior"
+                      width="300"
+                      height="200"
+                    ></img>
                   </div>
-                  <div class="col-md-4  form-title-ad ">
+                  <div class="col-md-6  form-title-ad ">
                     Description: {val.description} | Rent: {val.rent} | AdNo:{" "}
                     {val.id_property_ad}
                     <br></br>

@@ -76,6 +76,9 @@ body {
 
 .companyLogo {
   height: 160px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .form-title {
@@ -106,10 +109,6 @@ body {
 }
 
 /*Ad */
-
-.form-title-ad {
-  align-items: flex-end;
-}
 
 .footer-top {
   padding-bottom: 90px;
@@ -142,4 +141,100 @@ code {
   background-attachment: fixed;
   position: relative;
   z-index: 2;
+}
+
+/*Ad images */
+
+.ad_image {
+  margin-left: 20px;
+}
+
+/* Create Ad */
+
+.base-sign-container-create-ad {
+  background-color: whitesmoke;
+  opacity: 0.9;
+  border-radius: 8px;
+  padding-bottom: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.hero-create-ad {
+  background-color: lightblue;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  z-index: 2;
+}
+
+.image-preview {
+  border: dashed 1px lightgrey;
+  border-radius: 8px;
+  height: 200px;
+  width: 225px;
+  align-items: center;
+  display: flex;
+}
+
+.description-input {
+  height: 120px;
+  margin-top: 10px;
+}
+
+.rent-input {
+  margin-top: 10px;
+}
+
+.preview-paragraph {
+  text-align: center;
+  color: lightgrey;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.upload-label {
+  border-radius: 8px;
+  color: white;
+  height: 80px;
+  width: 200px;
+  background-color: skyblue;
+
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 15px;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-label:hover {
+  background-color: rgba(34, 178, 235, 0.355);
+}
+
+/* Registration Rental Agency */
+
+.hero-registration-rental-agency {
+  background-image: url(../src/assets/images/rental_agency.jpeg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  z-index: 2;
+}
+
+.base-sign-container-login {
+  background-color: whitesmoke;
+  opacity: 0.9;
+  border-radius: 8px;
+  padding-bottom: 60px;
+  margin-bottom: 50px;
+  margin-top: 50px;
 }
