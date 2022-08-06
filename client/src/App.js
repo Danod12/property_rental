@@ -12,7 +12,6 @@ import ProtectedRoutes from "./pages/ProtectedRoutes";
 import Create_ad from "./pages/Create_ad";
 import MyAd from "./pages/MyAd";
 
-import Ad_Highlight from "./pages/Ad_highlight";
 import Footer from "./components/footer/index";
 import Registration_Customer from "./pages/Registration_Customer";
 import Registration_Rental_Agency from "./pages/Registration_Rental_Agency";
@@ -23,6 +22,7 @@ Bootstrap Components
 
 import Navbar_Home from "./components/navbar/Navbar_Home";
 import Navbar_Customer from "./components/navbar/Navbar_Customer";
+import Applicants from "./pages/Applicants";
 
 /*thhis is is */
 
@@ -31,7 +31,7 @@ function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [userId, setUserId] = useState(null);
   const [adId, setAdId] = useState(null);
-
+  console.log(adId);
   return (
     <div>
       <Router>
@@ -74,7 +74,7 @@ function App() {
                 <MyAd />
               </Route>
               <Route path={`/myadverts/:adId`}>
-                <Ad_Highlight id_property_ad={adId} />
+                <Applicants id_property_ad={adId} />
               </Route>
             </AdContext.Provider>
           </LoginContext.Provider>

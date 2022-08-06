@@ -311,17 +311,30 @@ app.get("/adverts/:id_property_ad", (req, res) => {
   });
 });
 
-///Individual Ad Display
+///Applicant Display
 
 app.get("/advert/:id_property_ad", (req, res) => {
-  id_property_ad = req.params.id_property_ad;
+  const id_property_ad = req.params.id_property_ad;
 
   const getIndAd =
-    "SELECT description, rent FROM property_rental.property_ad WHERE id_property_ad = (?)";
+    "SELECT id_user_customer, verification  FROM property_rental.property_ad_application WHERE id_property_ad = (?)";
   db.query(getIndAd, [id_property_ad], (err, result) => {
     console.log(id_property_ad);
     res.send(result);
     console.log(err);
+  });
+});
+
+//Applicant List
+
+app.post("/application_profiles", (req, res) => {
+  const id = req.body.customerNumber;
+
+  const getApplicantProfile = "SELECT * from user_customer WHERE id = ?";
+
+  db.query(getApplicantProfile, [id], (err, resu) => {
+    console.log(err);
+    res.send(resu);
   });
 });
 

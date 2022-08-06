@@ -18,28 +18,29 @@ function MyAd() {
     });
   }, []);
 
-  const findAd = () => {
+  useEffect(() => {
     Axios.get(getMyAds).then((response) => {
       setMyAds(response.data);
     });
-  };
+  }, [dbID]);
 
   return (
     <div>
-      <button onClick={findAd}>Find My Ads</button>
-
-      {myAds.map((val) => {
-        console.log(val);
-        return (
-          <div>
-            <AdIndv
-              description={val.description}
-              rent={val.rent}
-              ID={val.id_property_ad}
-            />
-          </div>
-        );
-      })}
+      <div>
+        {myAds.map((val) => {
+          console.log(val);
+          return (
+            <div>
+              <AdIndv
+                description={val.description}
+                rent={val.rent}
+                ID={val.id_property_ad}
+                property_photo={val.property_photo}
+              />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

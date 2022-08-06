@@ -40,8 +40,9 @@ function Create_ad() {
     console.log("hi");
     console.log(image.data);
     e.preventDefault();
+
     let formData = new FormData();
-    formData.append("file", image.data);
+    formData.append("file", img.data);
     const result = await Axios.post(
       "http://localhost:3001/upload_prop_photo",
       formData
