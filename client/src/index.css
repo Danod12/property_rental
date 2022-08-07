@@ -238,3 +238,22 @@ input[type="file"] {
   margin-bottom: 50px;
   margin-top: 50px;
 }
+
+/*Applicant Pages */
+
+.section {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.card-effect {
+  box-shadow: var(--box-shadow);
+  background-color: whitesmoke;
+  padding: 25px;
+  transition: all 0.35 ease;
+}
+
+.card-effect:hover {
+  box-shadow: none;
+  transform: translateY(5px);
+}
