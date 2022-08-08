@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 function Applicants() {
   const [applicants, setApplicants] = useState([]);
@@ -62,31 +62,21 @@ function Applicants() {
   return (
     <div>
       <button onClick={findFullProfiles}>Find Profiles</button>
-      <div>
-        <section id="section">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-8 mx-auto text-center">
-                <h6 class="text-primary">Your Rental Applications</h6>
-                <h1>Applications</h1>
-                <p>
-                  These are the users that have responded to your property ads
-                </p>
-              </div>
-            </div>
 
-            <div class="row">
-              <div class="col-leg-4">
-                <div class="applications">
-                  <div class="iconbox ">I</div>
-                  <h5>Profile</h5>
-                  <p>Profile Info</p>
-                </div>
-              </div>
-            </div>
+      {fullApplicantProfile.map((val) => {
+        return (
+          <div>
+            id: {val.id}
+            <Link to={`/work_reference/${val.work_ref}`}>
+              View Work Reference
+            </Link>
+            <br></br>
+            <Link to={`/landlord_reference/${val.landlord_ref}`}>
+              View Landlord Reference
+            </Link>
           </div>
-        </section>
-      </div>
+        );
+      })}
     </div>
   );
 }

@@ -37,7 +37,7 @@ function Create_ad() {
     };
     setPreviewImage(img.preview);
     setImage(img);
-    console.log("hi");
+
     console.log(image.data);
     e.preventDefault();
 

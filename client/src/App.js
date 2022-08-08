@@ -23,6 +23,8 @@ Bootstrap Components
 import Navbar_Home from "./components/navbar/Navbar_Home";
 import Navbar_Customer from "./components/navbar/Navbar_Customer";
 import Applicants from "./pages/Applicants";
+import Work_Reference_View from "./components/work_reference_view/Work_Reference_View";
+import Landlord_Reference_View from "./components/landlord_ref_view/Landlord_Reference_View";
 
 /*thhis is is */
 
@@ -75,6 +77,14 @@ function App() {
               </Route>
               <Route path={`/myadverts/:adId`}>
                 <Applicants id_property_ad={adId} />
+              </Route>
+
+              <Route path={`/work_reference/:work_reference`}>
+                <Work_Reference_View />
+              </Route>
+
+              <Route path={`/landlord_reference/:landlord_reference`}>
+                <Landlord_Reference_View />
               </Route>
             </AdContext.Provider>
           </LoginContext.Provider>

@@ -7,8 +7,11 @@ function Update() {
   const [image, setImage] = useState({ preview: "", data: "" });
   const [status, setStatus] = useState("");
   const [incomeVer, setIncomeVer] = useState([]);
-
   const [dbID, setDbID] = useState(null);
+
+  const [workReferenceName, setWorkReferenceName] = useState("");
+  const [landlordReferenceName, setLandlordReferenceName] = useState("");
+  const [photoReferenceName, setPhotoReferenceName] = useState("");
 
   useEffect(() => {
     Axios.get("http://localhost:3001/login").then((response) => {
@@ -20,26 +23,98 @@ function Update() {
 
   /* Work Reference Update */
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    let formData = new FormData();
-    formData.append("file", image.data);
-    const response = await Axios.post(url, formData, {
-      userID: dbID,
-    });
-
-    if (response) setStatus(response.statusText);
-  };
-
-  const handleFileChange = (e) => {
-    const img = {
+  const handleWorkReference = async (e) => {
+    const workRef = {
       preview: URL.createObjectURL(e.target.files[0]),
       data: e.target.files[0],
     };
 
-    setImage(img);
+    console.log(workRef.data);
+    e.preventDefault();
+
+    let formData = new FormData();
+    formData.append("file", workRef.data);
+    const result = await Axios.post(
+      "http://localhost:3001/upload_workref",
+      formData
+    );
+
+    console.log(result.data);
+    setWorkReferenceName(result.data);
   };
+
+  /* Landlord Reference */
+
+  const handleLandlordReference = async (e) => {
+    const landlordRef = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    };
+
+    console.log(landlordRef.data);
+    e.preventDefault();
+
+    let formData = new FormData();
+    formData.append("file", landlordRef.data);
+    const result = await Axios.post(
+      "http://localhost:3001/upload_landlord_ref",
+      formData
+    );
+
+    console.log(result.data);
+    setLandlordReferenceName(result.data);
+  };
+
+  const handlePhotoReference = async (e) => {
+    const photoRef = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    };
+
+    console.log(photoRef.data);
+    e.preventDefault();
+
+    let formData = new FormData();
+    formData.append("file", photoRef.data);
+    const result = await Axios.post(
+      "http://localhost:3001/upload_photo_ref",
+      formData
+    );
+
+    console.log(result.data);
+    setPhotoReferenceName(result.data);
+  };
+
+  /*Photo ID */
+
+  /* Update Profile */
+
+  const updateWorkRef = async (e) => {
+    Axios.post("http://localhost:3001/work_update", {
+      workReference: workReferenceName,
+
+      profileId: dbID,
+    }).then(() => {});
+    console.log("you made it ");
+  };
+
+  const updateLandlordRef = async (e) => {
+    Axios.post("http://localhost:3001/landlord_update", {
+      landlordReference: landlordReferenceName,
+
+      profileId: dbID,
+    }).then(() => {});
+    console.log("you made it ");
+  };
+
+  const updatePhotoID = async (e) => {
+    Axios.post("http://localhost:3001/photo_update", {
+      photoReference: photoReferenceName,
+      profileId: dbID,
+    }).then(() => {});
+    console.log("you made it ");
+  };
+
   /* Income Verification*/
 
   const transactionData = IncomeData.transactions; //transaction data array
@@ -139,10 +214,48 @@ function Update() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input type="file" name="file" onChange={handleFileChange} />
-        <button type="submit">Send Image</button>
+      <form>
+        <input
+          type="file"
+          id="fileDesc1"
+          name="file1"
+          onChange={handleWorkReference}
+        />
+        <label class="upload-label" for="fileDesc1">
+          <div>&nbsp;</div>
+          Work Reference
+        </label>
       </form>
+
+      <form>
+        <input
+          type="file"
+          id="fileDesc2"
+          name="file2"
+          onChange={handleLandlordReference}
+        />
+        <label class="upload-label" for="fileDesc2">
+          <div>&nbsp;</div>
+          Landlord Reference
+        </label>
+      </form>
+
+      <form>
+        <input
+          type="file"
+          id="fileDesc3"
+          name="file3"
+          onChange={handlePhotoReference}
+        />
+        <label class="upload-label" for="fileDesc3">
+          <div>&nbsp;</div>
+          Photo Reference
+        </label>
+      </form>
+
+      <button onClick={updateWorkRef}>Update Work Reference</button>
+      <button onClick={updateLandlordRef}>Update Landlord Reference</button>
+      <button onClick={updatePhotoID}>Update PhotoID</button>
       {status && <h4>{status}</h4>}
 
       <button onClick={incomeCalc}> Verify Income</button>

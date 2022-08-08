@@ -341,3 +341,143 @@ app.post("/application_profiles", (req, res) => {
 app.listen(PORT, () => {
   console.log("SERVER ACTIVATED");
 });
+
+/*Work Reference Update */
+
+const storageWorkRef = multer.diskStorage({
+  destination: "../client/src/assets/work_references",
+
+  filename: (req, file, cb) => {
+    console.log(file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+}); //where the specification of the file is determined
+
+const uploadWorkRef = multer({ storage: storageWorkRef });
+
+app.set("view engine", "ejs");
+
+app.get("/upload_workref", (req, res) => {
+  res.render("file");
+});
+
+app.post("/upload_workref", uploadWorkRef.single("file"), (req, res) => {
+  const fileWorkRef = req.file.filename;
+
+  res.send(fileWorkRef);
+});
+
+/* LandLord Reference */
+
+const storageLandlordRef = multer.diskStorage({
+  destination: "../client/src/assets/landlord_references",
+
+  filename: (req, file, cb) => {
+    console.log(file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+}); //where the specification of the file is determined
+
+const uploadLandlordRef = multer({ storage: storageLandlordRef });
+
+app.set("view engine", "ejs");
+
+app.get("/upload_landlord_ref", (req, res) => {
+  res.render("file");
+});
+
+app.post(
+  "/upload_landlord_ref",
+  uploadLandlordRef.single("file"),
+  (req, res) => {
+    const fileLandlordRef = req.file.filename;
+
+    res.send(fileLandlordRef);
+  }
+);
+
+/*Photo ID */
+
+const storagePhotoRef = multer.diskStorage({
+  destination: "../client/src/assets/photo_references",
+
+  filename: (req, file, cb) => {
+    console.log(file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+}); //where the specification of the file is determined
+
+const uploadPhotoRef = multer({ storage: storagePhotoRef });
+
+app.set("view engine", "ejs");
+
+app.get("/upload_photo_ref", (req, res) => {
+  res.render("file");
+});
+
+app.post("/upload_photo_ref", uploadPhotoRef.single("file"), (req, res) => {
+  const filePhotoRef = req.file.filename;
+
+  res.send(filePhotoRef);
+});
+
+/* Profile Updates */
+
+app.post("/work_update", (req, res) => {
+  const work_ref = req.body.workReference;
+
+  const id = req.body.profileId;
+
+  db.query(
+    "UPDATE user_customer SET work_ref = (?) WHERE id = (?)",
+    [work_ref, id],
+    (err, res) => {
+      console.log(err);
+      console.log(res);
+    }
+  );
+});
+
+app.post("/landlord_update", (req, res) => {
+  const landlord_ref = req.body.landlordReference;
+
+  const id = req.body.profileId;
+
+  db.query(
+    "UPDATE user_customer SET  landlord_ref = (?) WHERE id = (?)",
+    [landlord_ref, id],
+    (err, res) => {
+      console.log(err);
+      console.log(res);
+    }
+  );
+});
+
+app.post("/photo_update", (req, res) => {
+  const photo_id = req.body.photoReference;
+  const id = req.body.profileId;
+
+  db.query(
+    "UPDATE user_customer SET  photo_id = (?) WHERE id = (?)",
+    [photo_id, id],
+    (err, res) => {
+      console.log(err);
+      console.log(res);
+    }
+  );
+});
+
+/*Full Profile */
+
+app.get("/personal_profile/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.query(
+    "SELECT * FROM user_customer WHERE id = (?)",
+    [id],
+    (err, result) => {
+      console.log(err);
+      res.send(result);
+    }
+  );
+});
