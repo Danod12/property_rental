@@ -271,7 +271,6 @@ function Update() {
         <div class="container base-sign-container-create-ad bg-white col-6">
           <div class="row create-header title-padding">
             <h3>Update Profile</h3>
-            <div class="row justify-content-center mt-3"></div>
           </div>
 
           <div class="row">

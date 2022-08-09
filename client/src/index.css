@@ -398,8 +398,12 @@ input[type="file"] {
   width: 215px;
 
   display: flex;
-  justify-content: center;
-  align-items: center;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  text-decoration: none;
+  word-wrap: break-word;
 }
 
 .upload-label-profile-submit {
@@ -501,7 +505,110 @@ input[type="file"] {
   height: 150px;
   width: 150px;
   border-radius: 150px;
-  border: 3px solid #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 3px solid lightgray;
+  margin-top: 20px;
+  margin-left: 20px;
+
   z-index: 1;
+}
+
+/*Rent Ad */
+
+.description-container {
+  border-radius: 6px;
+  border: 1px solid grey;
+  padding: 5px;
+}
+
+.description-position {
+  display: flex;
+  justify-content: center;
+}
+
+.rent-ad-title {
+  font-size: 17px;
+  padding: 3px;
+  border: 1px solid lightgrey;
+  border-radius: 6px;
+  margin: 5px;
+}
+
+.submit-application-button {
+  border-radius: 8px;
+  border-style: none;
+  border: 1px solid lightgrey;
+  color: white;
+  height: 42px;
+  width: 177px;
+
+  background-color: rgba(102, 102, 231, 0.967);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 15px;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-application-button:hover {
+  background-color: rgba(102, 102, 231, 0.8);
+  color: whitesmoke;
+}
+
+.button-positioning {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.test {
+  background-color: blue;
+}
+
+/* Applicant Link */
+
+.view-applicants-button {
+  border-radius: 8px;
+  border-style: none;
+  border: 1px solid lightgrey;
+  color: white;
+  height: 42px;
+  width: 177px;
+  text-decoration: none;
+
+  background-color: rgba(102, 102, 231, 0.967);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 15px;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-text-name {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 40px;
+  margin-top: 20px !important;
+}
+
+.profile-contact-text {
+  font-size: 12px;
+  color: grey;
+}
+
+.profile-border {
+  border-left: 6px solid grey;
+  height: 50px;
+}
+
+.link-margin {
+  transform: translateX(-11px);
 }

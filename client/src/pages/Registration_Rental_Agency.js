@@ -26,7 +26,7 @@ function Registration_Rental_Agency() {
     <div>
       <div class="hero-registration-rental-agency vh-100 d-flex align-items-center ">
         <div class="container bg-white base-sign-container col-6">
-          <div class="row justify-content-center mt-3">
+          <div class="row justify-content-center mt-20">
             <div class="col-md-3"></div>
           </div>
 

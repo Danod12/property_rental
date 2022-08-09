@@ -56,9 +56,10 @@ function Application({ id_property_ad }) {
   //finding verification token value
 
   return (
-    <div>
-      <h1> {id_property_ad}</h1>
-      <button onClick={submitApplication}>Submit Application</button>
+    <div class="d-flex justify-content-center">
+      <button class="submit-application-button" onClick={submitApplication}>
+        Submit Application
+      </button>
     </div>
   );
 }

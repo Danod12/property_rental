@@ -41,15 +41,7 @@ function Profile() {
     });
   }
 
-  /* */
-
-  /* */
-
-  return (
-    <div>
-      {myProfile.map((val) => {
-        return (
-          <div>
+  /*<div>
             <div class="hero-create-ad vh-120 d-flex align-items-center ">
               <div class="container base-sign-container-create-ad bg-white col-6">
                 <div class="row create-header">
@@ -61,6 +53,8 @@ function Profile() {
 
                 <div class="row">
                   <div class="col-md-12 form-title">
+                    <label>Property Description</label>
+
                     <br></br>
                   </div>
                 </div>
@@ -88,9 +82,64 @@ function Profile() {
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          </div> */
+
+  /* <img
+                        src={require(`../assets/photo_references/${val.photo_id}`)}
+                        alt=""
+                        class="img-circle mx-auto mb3"
+                      ></img> */
+
+  return (
+    <div>
+      <div>
+        {myProfile.map((val) => {
+          return (
+            <div class="hero-create-ad vh-120 d-flex align-items-center">
+              <div class="container base-sign-container-create-ad bg-white col-4">
+                <div class="row create-header title-padding">
+                  <h3>Profile </h3>
+                </div>
+
+                <div class="row d-flex">
+                  <div class="col-sm-6  ">
+                    <img
+                      class="img-circle"
+                      src={require(`../assets/photo_references/${val.photo_id}`)}
+                      width="200"
+                      height="200"
+                    ></img>
+                  </div>
+
+                  <div class="col-sm-5 ">
+                    <div class="row  profile-text-name ">
+                      {val.first_name} {val.last_name}
+                    </div>
+
+                    <div class="row  profile-contact-text ">
+                      E-mail: {val.email} <br></br>
+                      Contact No: {val.contact_no} <br></br>
+                      <Link
+                        class="link-margin"
+                        to={`/work_reference/${val.work_ref}`}
+                      >
+                        View Work Reference
+                      </Link>{" "}
+                      <br></br>
+                      <Link
+                        class="link-margin"
+                        to={`/landlord_reference/${val.landlord_ref}`}
+                      >
+                        View Landlord Reference
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
