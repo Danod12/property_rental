@@ -110,7 +110,7 @@ app.post("/register_rental_agency", (req, res) => {
   });
 });
 
-//Login Handling
+//Login Handling Customer
 
 app.get("/login", (req, res) => {
   if (req.session.user) {
@@ -150,7 +150,7 @@ app.post("/login", (req, res) => {
   );
 });
 
-// Woek Reference Upload
+// Work Reference Upload
 
 const multer = require("multer");
 
@@ -475,6 +475,54 @@ app.get("/personal_profile/:id", (req, res) => {
   db.query(
     "SELECT * FROM user_customer WHERE id = (?)",
     [id],
+    (err, result) => {
+      console.log(err);
+      res.send(result);
+    }
+  );
+});
+
+/* First Name Update */
+
+app.post("/update_first_name", (req, res) => {
+  id = req.body.id;
+  first_name = req.body.first_name;
+
+  db.query(
+    "UPDATE user_customer SET first_name = (?) WHERE id = (?)",
+    [first_name, id],
+    (err, result) => {
+      console.log(err);
+      res.send(result);
+    }
+  );
+});
+
+/* Last Name Update */
+
+app.post("/update_last_name", (req, res) => {
+  id = req.body.id;
+  last_name = req.body.last_name;
+
+  db.query(
+    "UPDATE user_customer SET last_name = (?) WHERE id = (?)",
+    [last_name, id],
+    (err, result) => {
+      console.log(err);
+      res.send(result);
+    }
+  );
+});
+
+/* Contact Update */
+
+app.post("/update_contact", (req, res) => {
+  id = req.body.id;
+  contact_no = req.body.contact_no;
+
+  db.query(
+    "UPDATE user_customer SET contact_no = (?) WHERE id = (?)",
+    [contact_no, id],
     (err, result) => {
       console.log(err);
       res.send(result);

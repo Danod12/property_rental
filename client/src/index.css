@@ -82,8 +82,8 @@ body {
 }
 
 .form-title {
-  font-weight: 800;
-  font-size: 12px;
+  font-weight: 500;
+  font-size: 20px;
 }
 
 .form-control {
@@ -93,7 +93,7 @@ body {
 }
 
 .submit-tag:hover {
-  background-color: #005051;
+  background-color: rgba(102, 102, 231, 0.967);
   color: whitesmoke;
 }
 
@@ -179,7 +179,8 @@ code {
 }
 
 .description-input {
-  height: 120px;
+  height: 40px;
+
   margin-top: 10px;
 }
 
@@ -219,6 +220,15 @@ input[type="file"] {
   background-color: rgba(34, 178, 235, 0.355);
 }
 
+.create-header {
+  border-radius: 4px;
+  background-color: rgba(102, 102, 231, 0.967);
+  height: 4em;
+  align-items: center;
+  padding-top: 10px;
+  color: rgb(254, 251, 251);
+}
+
 /* Registration Rental Agency */
 
 .hero-registration-rental-agency {
@@ -256,4 +266,242 @@ input[type="file"] {
 .card-effect:hover {
   box-shadow: none;
   transform: translateY(5px);
+}
+
+.verification_banner_true {
+  border-radius: 3px;
+  color: white;
+  height: 40px;
+  width: autopx;
+  background-color: green !important;
+
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 15px;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verification_banner_false {
+  border-radius: 3px;
+  color: white;
+  height: 40px;
+  width: autopx;
+  background-color: rgb(212, 56, 56) !important;
+
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 15px;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Card Images */
+
+.card-img-top {
+  background: rgb(90, 90, 246);
+  height: 60px;
+}
+
+.show-profile {
+  border-radius: 6px;
+  border-style: none;
+  border: 1px solid grey;
+  color: white;
+  height: 40px;
+  width: 200px;
+  background-color: rgb(101, 194, 231);
+
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 15px;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.show-profile:hover {
+  background-color: rgba(102, 102, 231, 0.967);
+}
+
+.section {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.base-sign-container-applications {
+  background-color: whitesmoke;
+  opacity: 0.9;
+  border-radius: 8px;
+  padding-bottom: 60px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  padding-top: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-create-applications {
+  background-color: lightblue;
+  border-radius: 6px;
+}
+
+.link-position {
+  display: flex;
+  justify-content: space-between !important;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+/*Update Profile */
+
+.upload-label-profile {
+  border-radius: 8px;
+  color: white;
+  height: 40px;
+  width: 200px;
+  background-color: rgb(101, 194, 231);
+
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 15px;
+  border: 1px solid lightgrey;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-preview-title {
+  border: 1px solid lightgrey;
+  border-radius: 6px;
+  font-weight: 300;
+  font-size: 12;
+  height: 40px;
+  width: 215px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-label-profile-submit {
+  border-radius: 8px;
+  border-style: none;
+  border: 1px solid lightgrey;
+  color: white;
+  height: 40px;
+  width: 200px;
+  background-color: rgba(102, 102, 231, 0.967);
+
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 15px;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-padding {
+  padding-left: 10px;
+}
+
+.name-updates {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 55px;
+}
+
+.upload-label-profile-name {
+  border-radius: 8px;
+  border-style: none;
+  border: 1px solid lightgrey;
+  color: white;
+  height: 42px;
+  width: 177px;
+
+  background-color: rgba(102, 102, 231, 0.967);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 15px;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-position {
+  display: flex;
+  justify-content: space-evenly !important;
+}
+
+/*Profile Page */
+
+.profile-border {
+  height: 10em;
+  width: 10em;
+  border: 1px solid grey;
+  background-color: transparent;
+  border-radius: 50%;
+}
+
+.frame {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.shadow {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6) !important;
+}
+
+.main-content {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 125px;
+  background-image: url("../src/assets/images/blue_background.webp");
+  background-position: center;
+  background-size: cover;
+  margin: 5px;
+}
+
+.img-circle {
+  height: 150px;
+  width: 150px;
+  border-radius: 150px;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
 }

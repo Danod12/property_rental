@@ -56,6 +56,10 @@ function Create_ad() {
     <div>
       <div class="hero-create-ad vh-120 d-flex align-items-center ">
         <div class="container base-sign-container-create-ad bg-white col-6">
+          <div class="row create-header">
+            <h3>Create Property Ad</h3>
+            <div class="row justify-content-center mt-3"></div>
+          </div>
           <div class="row justify-content-center mt-3">
             <div class="col-md-3"></div>
           </div>

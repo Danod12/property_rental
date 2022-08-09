@@ -19,7 +19,7 @@
   "transactions": [
     {
       "account_id": "BxBXxLj1m4HMXBm9WZZmCWVbPjX16EHwv99vp",
-      "amount": 10307.21,
+      "amount": 0.21,
       "iso_currency_code": "USD",
       "unofficial_currency_code": null,
       "category": ["Shops", "Computers and Electronics"],
@@ -62,7 +62,7 @@
 
     {
       "account_id": "BxBXxLj1m4HMXBm9WZZmCWVbPjX16EHwv99vp",
-      "amount": 20000.21,
+      "amount": 1200.21,
       "iso_currency_code": "USD",
       "unofficial_currency_code": null,
       "category": ["Shops", "Computers and Electronics"],
@@ -104,7 +104,7 @@
     },
     {
       "account_id": "BxBXxLj1m4HMXBm9WZZmCWVbPjX16EHwv99vp",
-      "amount": 200.0,
+      "amount": 20.0,
       "iso_currency_code": "USD",
       "unofficial_currency_code": null,
       "category": ["Shops", "Computers and Electronics"],
@@ -146,7 +146,7 @@
     },
     {
       "account_id": "BxBXxLj1m4HMXBm9WZZmCWVbPjX16EHwv99vp",
-      "amount": 1000.21,
+      "amount": 20.21,
       "iso_currency_code": "USD",
       "unofficial_currency_code": null,
       "category": ["Shops", "Computers and Electronics"],

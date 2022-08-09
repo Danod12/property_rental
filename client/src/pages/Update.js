@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import IncomeData from "../data/income_data.json";
+import { Upload } from "react-bootstrap-icons";
 
 function Update() {
   const url = "http://localhost:3001/update";
@@ -13,6 +14,15 @@ function Update() {
   const [landlordReferenceName, setLandlordReferenceName] = useState("");
   const [photoReferenceName, setPhotoReferenceName] = useState("");
 
+  const [workPreviewName, setWorkPreviewName] = useState("");
+  const [landlordPreviewName, setLandlordPreviewName] = useState("");
+  const [photoPreviewName, setPhotoPreviewName] = useState("");
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [contactNo, setContactNo] = useState("");
+
+  const [displayIncome, setDisplayIncome] = useState(null);
   useEffect(() => {
     Axios.get("http://localhost:3001/login").then((response) => {
       if (response.data.loggedIn === true) {
@@ -20,6 +30,36 @@ function Update() {
       }
     });
   }, []);
+
+  const firstNameUpdate = () => {
+    Axios.post("http://localhost:3001/update_first_name", {
+      id: dbID,
+      first_name: firstName,
+    }).then((response) => {
+      console.log(response);
+      console.log("it worked");
+    });
+  };
+
+  const lastNameUpdate = () => {
+    Axios.post("http://localhost:3001/update_last_name", {
+      id: dbID,
+      last_name: lastName,
+    }).then((response) => {
+      console.log(response.data);
+      console.log("added a last name");
+    });
+  };
+
+  const contactUpdate = () => {
+    Axios.post("http://localhost:3001/update_contact", {
+      id: dbID,
+      contact_no: contactNo,
+    }).then((response) => {
+      console.log(response.data);
+      console.log("updated contacted");
+    });
+  };
 
   /* Work Reference Update */
 
@@ -30,6 +70,7 @@ function Update() {
     };
 
     console.log(workRef.data);
+    setWorkPreviewName(workRef.data.name);
     e.preventDefault();
 
     let formData = new FormData();
@@ -52,6 +93,7 @@ function Update() {
     };
 
     console.log(landlordRef.data);
+    setLandlordPreviewName(landlordRef.data.name);
     e.preventDefault();
 
     let formData = new FormData();
@@ -65,6 +107,8 @@ function Update() {
     setLandlordReferenceName(result.data);
   };
 
+  /*Photo Reference */
+
   const handlePhotoReference = async (e) => {
     const photoRef = {
       preview: URL.createObjectURL(e.target.files[0]),
@@ -72,6 +116,7 @@ function Update() {
     };
 
     console.log(photoRef.data);
+    setPhotoPreviewName(photoRef.data.name);
     e.preventDefault();
 
     let formData = new FormData();
@@ -82,6 +127,7 @@ function Update() {
     );
 
     console.log(result.data);
+
     setPhotoReferenceName(result.data);
   };
 
@@ -139,14 +185,21 @@ function Update() {
     setIncomeVer(monthlyIncome);
   };
 
-  const submitIncome = () => {
+  const averageMonthCalc = () => {
     for (let i = 0; i < incomeVer.length; i++) {
       totalIncome = totalIncome + incomeVer[i];
     }
     averageMonthlyIncome = totalIncome / 12;
-    console.log(totalIncome);
-    console.log(averageMonthlyIncome);
+  };
 
+  const calculations = () => {
+    incomeCalc();
+    averageMonthCalc();
+    const cutNum = averageMonthlyIncome.toFixed(2);
+    setDisplayIncome(cutNum);
+  };
+
+  const submitIncome = () => {
     Axios.post("http://localhost:3001/verifyIncome", {
       verification_token: averageMonthlyIncome,
       id: dbID,
@@ -214,53 +267,336 @@ function Update() {
 
   return (
     <div>
-      <form>
-        <input
-          type="file"
-          id="fileDesc1"
-          name="file1"
-          onChange={handleWorkReference}
-        />
-        <label class="upload-label" for="fileDesc1">
-          <div>&nbsp;</div>
-          Work Reference
-        </label>
-      </form>
+      <div class="hero-create-ad vh-120 d-flex align-items-center ">
+        <div class="container base-sign-container-create-ad bg-white col-6">
+          <div class="row create-header title-padding">
+            <h3>Update Profile</h3>
+            <div class="row justify-content-center mt-3"></div>
+          </div>
 
-      <form>
-        <input
-          type="file"
-          id="fileDesc2"
-          name="file2"
-          onChange={handleLandlordReference}
-        />
-        <label class="upload-label" for="fileDesc2">
-          <div>&nbsp;</div>
-          Landlord Reference
-        </label>
-      </form>
+          <div class="row">
+            <div class="col-md-8 form-title mt-3">
+              <label>First Name</label>
+            </div>
+          </div>
 
-      <form>
-        <input
-          type="file"
-          id="fileDesc3"
-          name="file3"
-          onChange={handlePhotoReference}
-        />
-        <label class="upload-label" for="fileDesc3">
-          <div>&nbsp;</div>
-          Photo Reference
-        </label>
-      </form>
+          <div class="row d-flex">
+            <div class="col-md-7 form-title mt-3">
+              <input
+                class="form-control description-input longInput"
+                type="text"
+                placeholder="First Name"
+                onChange={(e) => {
+                  setFirstName(e.target.value);
+                }}
+              ></input>
+              <br></br>
+            </div>
 
-      <button onClick={updateWorkRef}>Update Work Reference</button>
-      <button onClick={updateLandlordRef}>Update Landlord Reference</button>
-      <button onClick={updatePhotoID}>Update PhotoID</button>
-      {status && <h4>{status}</h4>}
+            <div class="col-md-4 name-updates ">
+              <button
+                class="upload-label-profile-name button-postion"
+                onClick={firstNameUpdate}
+              >
+                Update First Name
+              </button>
 
-      <button onClick={incomeCalc}> Verify Income</button>
+              <br></br>
+            </div>
+          </div>
 
-      <button onClick={submitIncome}> Submit Income</button>
+          <div
+            style={{
+              borderTop: "2px solid lightgrey ",
+              marginLeft: 20,
+              marginRight: 20,
+            }}
+          ></div>
+          <br></br>
+
+          <div class="row">
+            <div class="col-md-8 form-title mt-3">
+              <label>Last Name</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-7 form-title mt-3">
+              <input
+                class="form-control description-input longInput"
+                type="text"
+                placeholder="First Name"
+                onChange={(e) => {
+                  setLastName(e.target.value);
+                }}
+              ></input>
+              <br></br>
+            </div>
+
+            <div class="col-md-4 name-updates ">
+              <button
+                class="upload-label-profile-name button-postion"
+                onClick={lastNameUpdate}
+              >
+                Update Last Name
+              </button>
+
+              <br></br>
+            </div>
+          </div>
+
+          <div
+            style={{
+              borderTop: "2px solid lightgrey ",
+              marginLeft: 20,
+              marginRight: 20,
+            }}
+          ></div>
+          <br></br>
+
+          <div class="row">
+            <div class="col-md-8 form-title mt-3">
+              <label>Contact Number</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-7 form-title mt-3">
+              <input
+                class="form-control description-input longInput"
+                type="text"
+                placeholder="Contact Number"
+                onChange={(e) => {
+                  setContactNo(e.target.value);
+                }}
+              ></input>
+              <br></br>
+            </div>
+
+            <div class="col-md-4 name-updates ">
+              <button
+                class="upload-label-profile-name button-postion"
+                onClick={contactUpdate}
+              >
+                Update Contact Number
+              </button>
+
+              <br></br>
+            </div>
+          </div>
+
+          <div
+            style={{
+              borderTop: "2px solid lightgrey ",
+              marginLeft: 20,
+              marginRight: 20,
+            }}
+          ></div>
+          <br></br>
+
+          <div class="row justify-content-center">
+            <div class="col-md-12 form-title mb-4 title-padding justify-content-center">
+              <label>Work Reference</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 form-title">
+              <form>
+                <input
+                  type="file"
+                  id="fileDesc1"
+                  name="file1"
+                  onChange={handleWorkReference}
+                />
+                <label class="upload-label-profile" for="fileDesc1">
+                  <Upload />
+                  <div>&nbsp;</div>
+                  Work Reference
+                </label>
+              </form>
+
+              <br></br>
+            </div>
+
+            <div class="col-md-4 form-title ">
+              <p class="link-style upload-preview-title">
+                {workPreviewName}
+                &nbsp;
+              </p>
+
+              <br></br>
+            </div>
+
+            <div class="col-md-4 form-title">
+              <p>
+                <button
+                  class="upload-label-profile-submit"
+                  onClick={updateWorkRef}
+                >
+                  Update Work Reference
+                </button>
+              </p>
+
+              <br></br>
+            </div>
+          </div>
+
+          <div
+            style={{
+              borderTop: "2px solid lightgrey ",
+              marginLeft: 20,
+              marginRight: 20,
+            }}
+          ></div>
+          <br></br>
+
+          <div class="row justify-content-center mt-3">
+            <div class="col-md-12 form-title mb-4">
+              <label>Landlord Reference</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 form-title">
+              <form>
+                <input
+                  type="file"
+                  id="fileDesc2"
+                  name="file2"
+                  onChange={handleLandlordReference}
+                />
+                <label class="upload-label-profile" for="fileDesc2">
+                  <Upload />
+                  <div>&nbsp;</div>
+                  Landlord Reference
+                </label>
+              </form>
+
+              <br></br>
+            </div>
+
+            <div class="col-md-4 form-title ">
+              <p class="link-style upload-preview-title">
+                {landlordPreviewName}
+                &nbsp;
+              </p>
+
+              <br></br>
+            </div>
+
+            <div class="col-md-4 form-title">
+              <p>
+                <button
+                  class="upload-label-profile-submit"
+                  onClick={updateLandlordRef}
+                >
+                  Update Landlord Reference
+                </button>
+              </p>
+
+              <br></br>
+            </div>
+          </div>
+
+          <div
+            style={{
+              borderTop: "2px solid lightgrey ",
+              marginLeft: 20,
+              marginRight: 20,
+            }}
+          ></div>
+
+          <div class="row justify-content-center mt-3">
+            <div class="col-md-12 form-title mb-4">
+              <label>Photo ID</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 form-title">
+              <form>
+                <input
+                  type="file"
+                  id="fileDesc3"
+                  name="file3"
+                  onChange={handlePhotoReference}
+                />
+                <label class="upload-label-profile" for="fileDesc3">
+                  <Upload />
+                  <div>&nbsp;</div>
+                  Landlord Reference
+                </label>
+              </form>
+
+              <br></br>
+            </div>
+
+            <div class="col-md-4 form-title ">
+              <p class="link-style upload-preview-title">
+                {photoPreviewName}
+                &nbsp;
+              </p>
+
+              <br></br>
+            </div>
+
+            <div class="col-md-4 form-title">
+              <p>
+                <button
+                  class="upload-label-profile-submit"
+                  onClick={updatePhotoID}
+                >
+                  Update Photo ID Reference
+                </button>
+              </p>
+
+              <br></br>
+            </div>
+          </div>
+
+          <div
+            style={{
+              borderTop: "2px solid lightgrey ",
+              marginLeft: 20,
+              marginRight: 20,
+            }}
+          ></div>
+
+          <div class="row justify-content-center mt-3">
+            <div class="col-md-12 form-title mb-4">
+              <label>Income Verification</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 form-title">
+              <button class="upload-label-profile" onClick={calculations}>
+                {" "}
+                Verify Income
+              </button>
+
+              <br></br>
+            </div>
+
+            <div class="col-md-4 form-title">
+              <p class="upload-preview-title">{displayIncome}</p>
+            </div>
+
+            <div class="col-md-4 form-title">
+              <p>
+                <button
+                  class="upload-label-profile-submit"
+                  onClick={submitIncome}
+                >
+                  {" "}
+                  Submit Income
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

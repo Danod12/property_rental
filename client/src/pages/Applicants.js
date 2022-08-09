@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import Verification_render_true from "../components/verification_render/Verification_render_true";
+import Verification_render_false from "../components/verification_render/Verification_render_false";
+import Applicants_Page from "../components/applicants_page/Applicants_Page";
 
 function Applicants() {
   const [applicants, setApplicants] = useState([]);
 
   const [applicantList, setApplicantList] = useState([]);
   const [fullApplicantProfile, setFullApplicantProfile] = useState([]);
+  const [show, setShow] = useState(true);
+
+  const hideButton = () => {
+    setShow(false);
+  };
 
   const { adId } = useParams();
 
@@ -57,26 +65,73 @@ function Applicants() {
       };
     }
     setFullApplicantProfile(fullProfile);
+    console.log(fullProfile);
+  };
+
+  const viewer = () => {
+    <p> Full Applicant Profile</p>;
+    console.log(fullApplicantProfile);
+
+    <p>Applicant</p>;
+    console.log(applicants);
+
+    <p> Applicant list </p>;
+    console.log(applicantList);
+
+    console.log(fullProfile);
   };
 
   return (
-    <div>
-      <button onClick={findFullProfiles}>Find Profiles</button>
+    <div class="container">
+      {show ? (
+        <Applicants_Page
+          findFullProfiles={findFullProfiles}
+          hideButton={hideButton}
+          adId={adId}
+        />
+      ) : null}
 
-      {fullApplicantProfile.map((val) => {
-        return (
-          <div>
-            id: {val.id}
-            <Link to={`/work_reference/${val.work_ref}`}>
-              View Work Reference
-            </Link>
-            <br></br>
-            <Link to={`/landlord_reference/${val.landlord_ref}`}>
-              View Landlord Reference
-            </Link>
-          </div>
-        );
-      })}
+      <div class="row">
+        {fullApplicantProfile.map((val) => {
+          let verified = null;
+
+          if (val.verification == 1) {
+            verified = true;
+          } else {
+            verified = false;
+          }
+
+          return (
+            <div class="col-md-4 mb-4 mt-5">
+              <div class="card">
+                <div>
+                  {verified ? (
+                    <Verification_render_true />
+                  ) : (
+                    <Verification_render_false />
+                  )}
+                </div>
+
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    Name: {val.first_name} {val.last_name}
+                  </li>
+                  <li class="list-group-item">Contact No: {val.contact_no}</li>
+                  <li class="list-group-item">Email: {val.email}</li>
+                </ul>
+                <div class="card-body link-position">
+                  <Link to={`/work_reference/${val.work_ref}`}>
+                    Work Reference
+                  </Link>{" "}
+                  <Link to={`/landlord_reference/${val.landlord_ref}`}>
+                    Landlord Reference
+                  </Link>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
