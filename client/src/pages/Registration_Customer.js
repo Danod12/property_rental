@@ -10,6 +10,7 @@ function Registration_Customer() {
   const [firstNameReg, setFirstNameReg] = useState("");
   const [lastNameReg, setLastNameReg] = useState("");
   const [emailReg, setEmailReg] = useState("");
+  const [statusRegister, setStatusRegister] = useState("");
 
   const register = () => {
     Axios.post("http://localhost:3001/register", {
@@ -20,6 +21,7 @@ function Registration_Customer() {
       email: emailReg,
     }).then((response) => {
       console.log(response.data);
+      setStatusRegister("Thank you for registering!");
     });
   };
 
@@ -118,6 +120,12 @@ function Registration_Customer() {
               }}
             ></input>
             <br></br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 login-status-text mb-4">
+            <div class="col-md-12 login-status-text">{statusRegister}</div>
           </div>
         </div>
         <br></br>

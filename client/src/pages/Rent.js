@@ -30,7 +30,7 @@ function Rent() {
                       height="250"
                     ></img>
                   </div>
-                  <div class="col-md-6 form-title-ad description-container   ">
+                  <div class="col-md-6 form-title-ad description-container mt-4 ">
                     <div class="row description-position mt-3 ">
                       <div class="col-md-3 rent-ad-title d-flex justify-content-center">
                         Description

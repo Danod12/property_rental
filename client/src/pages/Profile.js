@@ -22,73 +22,13 @@ function Profile() {
     });
   }, []);
 
-  /*Profile
-
-  {
-  
-      return (
-        <div>
-          Email = {val.email};
-          <Link to={`/work_reference/${val.work_ref}`}>
-            View Work Reference
-          </Link>
-          <br></br>
-          <Link to={`/landlord_reference/${val.landlord_ref}`}>
-            View Landlord Reference
-          </Link>
-        </div
-      );
+  const deleteProfile = () => {
+    Axios.delete("http://localhost:3001/delete_profile", {
+      id: userId,
+    }).then((response) => {
+      alert("Profile Deleted");
     });
-  }
-
-  /*<div>
-            <div class="hero-create-ad vh-120 d-flex align-items-center ">
-              <div class="container base-sign-container-create-ad bg-white col-6">
-                <div class="row create-header">
-                  <div class="row justify-content-center mt-3"></div>
-                </div>
-                <div class="row justify-content-center mt-3">
-                  <div class="col-md-3"></div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12 form-title">
-                    <label>Property Description</label>
-
-                    <br></br>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12 form-title">
-                    <br></br>
-                  </div>
-                </div>
-
-                <div class="row mb-4 mt-4">
-                  <div class="col-md-4 form-title">
-                    <label>Property Photos</label>
-                  </div>
-                </div>
-
-                <div class="row  mb-4 mt-4">
-                  <div class="col-md-6 form-title">
-                    <br></br>
-
-                    <br></br>
-                  </div>
-
-                  <div class="col-md-6 "></div>
-                </div>
-              </div>
-            </div>
-          </div> */
-
-  /* <img
-                        src={require(`../assets/photo_references/${val.photo_id}`)}
-                        alt=""
-                        class="img-circle mx-auto mb3"
-                      ></img> */
+  };
 
   return (
     <div>
@@ -132,6 +72,12 @@ function Profile() {
                       >
                         View Landlord Reference
                       </Link>
+                    </div>
+
+                    <div class="row mt-3">
+                      <div class="col-lg-12 d-flex justify-content-center ">
+                        <button class="delete-button "> Delete Profile</button>
+                      </div>
                     </div>
                   </div>
                 </div>

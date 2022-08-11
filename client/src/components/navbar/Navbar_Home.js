@@ -33,11 +33,18 @@ function Navbar({ userId }) {
                     </Nav.Link>
                   </Nav.Item>
 
-                  <Nav.Item>
-                    <Nav.Link as={Link} to={"/login"}>
-                      Login
-                    </Nav.Link>
-                  </Nav.Item>
+                  <NavDropdown title="Login" id="nav-dropdown">
+                    <NavDropdown.Item>
+                      <Nav.Link as={Link} to={"/login"}>
+                        Renter
+                      </Nav.Link>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item>
+                      <Nav.Link as={Link} to={"/login_agency"}>
+                        Rental Agency
+                      </Nav.Link>
+                    </NavDropdown.Item>
+                  </NavDropdown>
 
                   <NavDropdown title="Register" id="nav-dropdown">
                     <NavDropdown.Item>

@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import LandingMain from "./pages/Landing_main";
 import Rent from "./pages/Rent";
 import Login from "./pages/Login";
+import LoginAgency from "./pages/Login_Agency";
 import Profile from "./pages/Profile";
 import Update from "./pages/Update";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
@@ -25,6 +26,7 @@ import Navbar_Customer from "./components/navbar/Navbar_Customer";
 import Applicants from "./pages/Applicants";
 import Work_Reference_View from "./components/work_reference_view/Work_Reference_View";
 import Landlord_Reference_View from "./components/landlord_ref_view/Landlord_Reference_View";
+import Navbar_Rental from "./components/navbar/Navbar_Rental";
 
 /*thhis is is */
 
@@ -33,17 +35,29 @@ function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [userId, setUserId] = useState(null);
   const [adId, setAdId] = useState(null);
+  const [userIdentity, setUserIdentity] = useState(null);
   console.log(adId);
   return (
     <div>
       <Router>
         <Switch>
           <LoginContext.Provider
-            value={{ isAuth, setIsAuth, userId, setUserId }}
+            value={{
+              isAuth,
+              setIsAuth,
+              userId,
+              setUserId,
+              userIdentity,
+              setUserIdentity,
+            }}
           >
             <AdContext.Provider value={{ userId, setUserId, adId, setAdId }}>
               {isAuth ? (
-                <Navbar_Customer userId={userId} />
+                userIdentity ? (
+                  <Navbar_Customer userId={userId} />
+                ) : (
+                  <Navbar_Rental userId={userId} />
+                )
               ) : (
                 <Navbar_Home userId={userId} />
               )}
@@ -55,6 +69,7 @@ function App() {
                 component={Registration_Customer}
               ></Route>
               <Route path="/login" component={Login}></Route>
+              <Route path="/login_agency" component={LoginAgency}></Route>
 
               <Route
                 path="/registration/rental_agency"

@@ -37,7 +37,7 @@ function Update() {
       first_name: firstName,
     }).then((response) => {
       console.log(response);
-      console.log("it worked");
+      alert("First Name Updated!");
     });
   };
 
@@ -47,7 +47,7 @@ function Update() {
       last_name: lastName,
     }).then((response) => {
       console.log(response.data);
-      console.log("added a last name");
+      alert("Last Name Updated!");
     });
   };
 
@@ -57,7 +57,7 @@ function Update() {
       contact_no: contactNo,
     }).then((response) => {
       console.log(response.data);
-      console.log("updated contacted");
+      alert("Contact Number Updated!");
     });
   };
 
@@ -79,9 +79,8 @@ function Update() {
       "http://localhost:3001/upload_workref",
       formData
     );
-
-    console.log(result.data);
     setWorkReferenceName(result.data);
+    alert("Work Reference Updated!");
   };
 
   /* Landlord Reference */
@@ -103,7 +102,7 @@ function Update() {
       formData
     );
 
-    console.log(result.data);
+    alert("Landlord Reference Updated!");
     setLandlordReferenceName(result.data);
   };
 
@@ -115,7 +114,6 @@ function Update() {
       data: e.target.files[0],
     };
 
-    console.log(photoRef.data);
     setPhotoPreviewName(photoRef.data.name);
     e.preventDefault();
 
@@ -141,7 +139,7 @@ function Update() {
 
       profileId: dbID,
     }).then(() => {});
-    console.log("you made it ");
+    alert("Work Reference Updated!");
   };
 
   const updateLandlordRef = async (e) => {
@@ -150,7 +148,7 @@ function Update() {
 
       profileId: dbID,
     }).then(() => {});
-    console.log("you made it ");
+    alert("Landlord Reference Updated!");
   };
 
   const updatePhotoID = async (e) => {
@@ -158,7 +156,7 @@ function Update() {
       photoReference: photoReferenceName,
       profileId: dbID,
     }).then(() => {});
-    console.log("you made it ");
+    alert("Photo ID Updated!");
   };
 
   /* Income Verification*/

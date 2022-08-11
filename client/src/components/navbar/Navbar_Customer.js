@@ -35,12 +35,6 @@ function Navbar_Customer({ isAuth, setIsAuth, userId, setUserId }) {
                   </Nav.Item>
 
                   <Nav.Item>
-                    <Nav.Link as={Link} to={"/create"}>
-                      Create Ad
-                    </Nav.Link>
-                  </Nav.Item>
-
-                  <Nav.Item>
                     <Nav.Link as={Link} to={"/update"}>
                       Update Profile
                     </Nav.Link>
@@ -49,12 +43,6 @@ function Navbar_Customer({ isAuth, setIsAuth, userId, setUserId }) {
                   <Nav.Item>
                     <Nav.Link as={Link} to={`/profile/${userId}`}>
                       Profile
-                    </Nav.Link>
-                  </Nav.Item>
-
-                  <Nav.Item>
-                    <Nav.Link as={Link} to={"/myadverts"}>
-                      My Ads
                     </Nav.Link>
                   </Nav.Item>
                 </Nav>

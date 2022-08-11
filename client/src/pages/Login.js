@@ -11,6 +11,7 @@ export default function Login() {
 
   const { setIsAuth } = useContext(LoginContext);
   const { setUserId } = useContext(LoginContext);
+  const { setUserIdentity } = useContext(LoginContext);
 
   Axios.defaults.withCredentials = true;
 
@@ -22,10 +23,11 @@ export default function Login() {
       if (response.data.message) {
         setLoginStatus(response.data.message);
       } else {
-        setLoginStatus(response.data[0].username);
+        setLoginStatus("Welcome" + " " + response.data[0].username + "!");
         setIsAuth(true);
         setUserId(response.data[0].id);
         console.log(response.data[0].id);
+        setUserIdentity(true);
       }
     });
   };
@@ -83,7 +85,12 @@ export default function Login() {
             <br></br>
           </div>
         </div>
-        <h1>{loginStatus}</h1>
+
+        <div class="row">
+          <div class="col-md-12 login-status-text mb-4">
+            <div class="col-md-12 login-status-text">{loginStatus}</div>
+          </div>
+        </div>
 
         <button class="form-control submit-tag" onClick={login}>
           Login

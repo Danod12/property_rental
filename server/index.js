@@ -78,6 +78,7 @@ app.post("/register", (req, res) => {
       [username, hash, firstName, lastName, email],
       (err, result) => {
         console.log(err);
+        console.log(result);
       }
     );
   });
@@ -140,7 +141,7 @@ app.post("/login", (req, res) => {
             console.log(req.session.user);
             res.send(result);
           } else {
-            res.send({ message: "Wrong username combo" });
+            res.send({ message: "Wrong Username/Password Combination" });
           }
         });
       } else {
@@ -528,4 +529,13 @@ app.post("/update_contact", (req, res) => {
       res.send(result);
     }
   );
+});
+
+app.delete("/delete_prfofile", (req, res) => {
+  id = req.body.id;
+
+  db.query("DELETE from user_table WHERE id = (?)", [id], (err, result) => {
+    console.log(err);
+    res.send(result);
+  });
 });
